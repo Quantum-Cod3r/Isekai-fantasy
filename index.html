@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Galactic Neon — Complete Roster (Sleek)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  /* Fonts */
+  @font-face {
+    font-family: 'OrbitLite';
+    src: local('Orbitron'), local('Arial');
+  }
+  :root{
+    --bg-1:#020217;
+    --bg-2:#071034;
+    --card:#0b1220;
+    --muted:#9fb3c8;
+    --text:#e8f4ff;
+    --glass: rgba(255,255,255,0.03);
+    --radius:14px;
+    --accent: #8be0ff;
+    --dps: #ff8a50;
+    --support: #37d1ff;
+    --tank: #ffd166;
+    --hybrid: #c07bff;
+    --pulse-duration: 2.6s;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1200px 600px at 15% 10%, rgba(120,60,255,0.06), transparent 10%),
+      radial-gradient(900px 500px at 85% 75%, rgba(50,160,255,0.03), transparent 8%),
+      linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  header{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#10042b,#081034);color:var(--accent);font-weight:800;box-shadow:0 10px 60px rgba(128,70,255,0.06)}
+  h1{margin:0;font-size:20px}
+  .sub{color:var(--muted);font-size:13px}
+
+  main{width:100%;max-width:1200px}
+  .intro{text-align:center;margin:8px 0 16px}
+  .intro p{color:var(--muted);margin:6px 0 0}
+
+  /* grid */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    width:100%;
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--radius);
+    overflow:hidden; cursor:pointer;
+    transition:transform .22s ease, box-shadow .28s ease;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    display:flex;flex-direction:column;height:320px;position:relative;border:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(2px);
+  }
+
+  .portrait{height:200px;background:linear-gradient(180deg,#030414,#081832);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .card:hover .portrait img{transform:scale(1.03)}
+
+  .info{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .hero-meta{display:flex;flex-direction:column}
+  .hero-name{font-weight:800;font-size:16px}
+  .hero-desc{font-size:12px;color:var(--muted);margin-top:4px;max-width:160px}
+
+  .role-badge{font-size:12px;padding:6px 8px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--muted)}
+
+  /* neon glows per role with breathing pulse */
+  .card[data-role="DPS"]{--glow: var(--dps)}
+  .card[data-role="Support"]{--glow: var(--support)}
+  .card[data-role="Tank"]{--glow: var(--tank)}
+  .card[data-role="Hybrid"]{--glow: var(--hybrid)}
+
+  .card::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;top:0;border-radius:var(--radius);
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    pointer-events:none; opacity:0;
+    transition:opacity .2s ease;
+  }
+  .card:hover::after{
+    opacity:1;
+    box-shadow:0 30px 80px rgba(0,0,0,0.65), 0 0 80px calc(var(--pulse-size,40px)) var(--glow);
+    animation:neonPulse var(--pulse-duration) infinite;
+  }
+  @keyframes neonPulse{
+    0%{filter:blur(0px);transform:translateZ(0) scale(1)}
+    50%{filter:blur(6px);transform:translateZ(0) scale(1.01)}
+    100%{filter:blur(0px);transform:translateZ(0) scale(1)}
+  }
+
+  /* subtle star overlay */
+  .portrait::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.02) 0px, transparent 6px),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.01) 0px, transparent 8px);
+    pointer-events:none;
+  }
+
+  /* legend */
+  .legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  .chip{display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));color:var(--muted);font-weight:700}
+  .swatch{width:12px;height:12px;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,0.4) inset}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(2,6,23,0.75), rgba(0,0,0,0.85));padding:28px;z-index:999}
+  .overlay.show{display:flex}
+  .sheet{width:min(1100px,98%);max-height:86vh;overflow:auto;border-radius:12px;background:linear-gradient(180deg,#041129,#072034);padding:18px;color:var(--text);box-shadow:0 30px 90px rgba(0,0,0,0.7)}
+  .sheet-top{display:flex;gap:18px;flex-wrap:wrap}
+  .sheet-img{width:320px;height:320px;border-radius:10px;overflow:hidden;background:#000;flex:0 0 320px}
+  .sheet-img img{width:100%;height:100%;object-fit:cover}
+  .sheet-right{flex:1}
+  .sheet-right h2{margin:0}
+  .muted{color:var(--muted)}
+  .stat-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .stat{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:8px;min-width:86px;text-align:center;color:var(--muted)}
+  .ability{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;margin-bottom:8px}
+  .ultimate{margin-top:12px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+  .close-btn{display:inline-block;margin-top:12px;background:linear-gradient(90deg,#7dd3fc,#c07bff);color:#021024;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer}
+  @media (max-width:880px){.sheet-img{width:220px;height:220px;flex:0 0 220px}.card{height:300px}.portrait{height:180px}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">GN</div>
+      <div>
+        <h1>Galactic Neon — Ultimate Hero Roster</h1>
+        <div class="sub">Sleek view — click a card for full details. Neon pulses & generated placeholders included.</div>
+      </div>
+    </div>
+    <div class="sub">Place optional images (`name.png`) beside this file. Missing images auto-generate placeholders.</div>
+  </header>
+
+  <main>
+    <div class="legend" aria-hidden="true">
+      <div class="chip"><span class="swatch" style="background:var(--dps)"></span> DPS</div>
+      <div class="chip"><span class="swatch" style="background:var(--support)"></span> Support</div>
+      <div class="chip"><span class="swatch" style="background:var(--tank)"></span> Tank</div>
+      <div class="chip"><span class="swatch" style="background:var(--hybrid)"></span> Hybrid</div>
+    </div>
+
+    <section class="intro">
+      <h2 style="margin:0">Pick a legend</h2>
+      <p>Alphabetized, color-coded, and glowing — click any card to open details.</p>
+    </section>
+
+    <section class="grid" id="heroesGrid"></section>
+  </main>
+
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="sheet" id="sheet"></div>
+  </div>
+
+<script>
+/* ---------------------------
+   FULL HERO DATA (all characters)
+   --------------------------- */
+const heroes = {
+  "Carlos": {race:"Dark Elf", role:"DPS", title:"Shadow Assassin", img:"carlos.png",
+    melee:"Dual Daggers (Shadowfangs) — can phase through matter for sneak attacks.",
+    abilities:[["Umbrakinesis","Manipulate and solidify shadows into weapons or clones. Stronger in darkness."],["Cloaking","Blend with shadows to become invisible briefly."],["Nightstep","Short-range teleport between shadowed spots."]],
+    passives:["Darkness Buff — +25% attack speed & agility at night/dim light.","Predator’s Focus — crit grows while stalking."],
+    ultimate:"Event Horizon — Carlos tears open a rift of darkness; creates a miniature black hole that drags in light, sound, and magic.",
+    stats:{Strength:11,Agility:19,Defense:9,Intelligence:18,Perception:19,"Magic Power":17,"Technique Control":20}
+  },
+
+  "Catherine": {race:"Seraph-Blessed Human", role:"Support", title:"Aquamancer Cleric", img:"catherine.png",
+    melee:"Sacred Grimoire – “Canticle of Tides” — floating hymnbook that amplifies voice-based spells.",
+    abilities:[["Sound Magic – Harmonic Resonance","Melodies heal allies or shatter enemies' focus."],["Hydrokinesis","Manipulates water into healing waves, barriers, or whips."],["Luminous Baptism","Radiant water wave that cleanses debuffs and deals holy splash damage."]],
+    passives:["Praise Buff — nearby allies gain HP regen when she sings.","Blessed Flow — heals scale with her mana flow.","Congregation Aura — stronger with more allies within radius."],
+    ultimate:"Divine Choir: Sancta Unda — cathedral of liquid light and sound; allies rapidly heal, enemies deafened and dissolved by holy currents.",
+    stats:{Strength:10,Agility:14,Defense:13,Intelligence:19,Perception:17,"Magic Power":20,"Technique Control":18}
+  },
+
+  "Cherise": {race:"Human/Elf Hybrid", role:"Hybrid", title:"Arcane Artiste / Reality Painter", img:"cherise.png",
+    melee:"Enchanted Paintbrush & Palette — conjures weapons, barriers, animate creations.",
+    abilities:[["Art Magic","Turns brushstrokes into magical effects / constructs."],["Living Canvas","Summons animated creations from paintings."],["Prismatic Veil","Bends light to create illusions or hide allies."],["Creative Distortion","Warps small areas of reality using paint-magic."]],
+    passives:["Inspire — boosts allies' morale & output.","Passion — stronger when emotionally charged.","Spirit Palette — creations strengthen over time."],
+    ultimate:"Masterpiece Cataclysm — paints battlefield into surreal world; allies buffed, enemies slowed & damaged.",
+    stats:{Defense:14,Strength:12,Agility:16,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
+  },
+
+  "David": {race:"Sylph-Tuned Human", role:"DPS", title:"Gale Swordsman", img:"david.png",
+    melee:"Twin Windblades — Zephyr & Tempest; cut by pressure rather than metal.",
+    abilities:[["Speedsetter","Accelerates perception and movement; heavy stamina/mana cost."],["Aero Slash","Sends vacuum blades / air bursts."],["Wind Step","Dashes mid-air using air currents."],["Cyclone Guard","Spins blades to form a mini-tornado shield."]],
+    passives:["Acceleration — gains speed the longer he moves.","Momentum Flow — hits boost next strike.","Wind’s Grace — cushions falls."],
+    ultimate:"Eye of the Tempest — spiral storm center; speed doubles; every movement spawns slicing wind rings.",
+    stats:{Strength:13,Agility:20,Defense:12,Intelligence:16,Perception:18,"Magic Power":15,"Technique Control":19}
+  },
+
+  "Dominion": {race:"Archon-Born", role:"Hybrid", title:"Dimensional Summoner", img:"dominion.png",
+    melee:"Arcane Grimoire — Codex of Realms; channels summoning seals.",
+    abilities:[["Summoning Arts","Calls entities from his private realm (tanks, mages, scouts)."],["Pocket Dimension","Storage/travel/trap area for allies or enemies."],["Spatial Shift","Teleport to a summon or swap entities."],["Binding Sigils","Runes boost summons or restrain foes."]],
+    passives:["Absolute Control — direct multiple summons without loss.","Dimensional Awareness — senses teleport traces.","Arcane Resonance — summons strengthen his magic."],
+    ultimate:"Grand Convergence — fuses summons into Eidolon Prime, colossal spirit avatar.",
+    stats:{Strength:10,Agility:12,Defense:16,Intelligence:19,Perception:18,"Magic Power":20,"Technique Control":19}
+  },
+
+  "Ethan": {race:"Half-Dragon", role:"DPS", title:"Infernal Vanguard", img:"ethan.png",
+    melee:"Scorched Chain Hook — fiery hybrid whip/blade that channels fire magic.",
+    abilities:[["Pyrokinesis","Control fire temperature & shape into weapons."],["Phoenix Recovery","Revive once per battle; flames restore wounds."],["Infernal Surge","Boosts power/speed when engulfed in flames."],["Draconic Roar","Molten pressure wave cracks armor."]],
+    passives:["Pyro Affinity — fire spells less costly & stronger.","Fire Resistance — immune to flames.","Molten Heart — grows stronger the longer he fights."],
+    ultimate:"Cataclysm Drive — releases dragon core; becomes flaming comet that obliterates enemies and reforms from ash.",
+    stats:{Defense:16,Strength:16,Agility:16,Intelligence:16,Perception:16,"Magic Control":16,"Technique Control":16}
+  },
+
+  "Gift": {race:"Human (Cursed Lineage)", role:"Hybrid", title:"Witch", img:"gift.png",
+    melee:"Grimoire-Wand Hybrid — amplifies spells via crimson sigils.",
+    abilities:[["Hemocraft","Converts blood into mana; amplify or heal at a cost."],["Scarlet Bind","Solid blood chains immobilize and drain."],["Witchfire Bloom","Field of crimson flames consumes magic."],["Sanguine Mirage","Blood-mist illusions echo attacks."]],
+    passives:["Crimson Catalyst","Witch’s Insight"],
+    ultimate:"Ritual of the Red Moon — massive sigil lifts enemies as energy is drained to empower allies.",
+    stats:{Defense:13,Strength:10,Agility:14,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":18}
+  },
+
+  "Gianna": {race:"Beastman (Feline Type)", role:"DPS", title:"Tech Predator", img:"gianna.png",
+    melee:"Enhanced Claw Gauntlets — mana-circuited gauntlets spark on slashes.",
+    abilities:[["Animal Instinct","Heightened senses & reaction."],["Savage Blitz","Rapid claw combo with static mana."],["Overdrive Rush","Electric adrenaline boosts physical stats."],["Hunter’s Pounce","Leaps, stunning & shocking on impact."]],
+    passives:["Savage Core","Techblood"],
+    ultimate:"Predator Protocol — beast form & tech merge; lightning claws & storm movement for 30s.",
+    stats:{Defense:15,Strength:17,Agility:18,Intelligence:16,Perception:17,"Magic Control":15,"Technique Control":16}
+  },
+
+  "Gregory": {race:"Celestial (Half-Angel)", role:"Tank", title:"Divine Hero", img:"gregory.png",
+    melee:"Lumisblade — radiant sword forged from condensed light.",
+    abilities:[["Superhuman Physique","Enhanced strength & endurance."],["Divine Spellcasting","Light-based magic for healing & shields."],["Aegis of Virtue","Golden barrier reflecting projectiles."],["Heaven’s Descent","Angel wings for flight and divine speed."]],
+    passives:["Hero’s Resolve","Divine Presence"],
+    ultimate:"Judgment Ascension — summons pillar of celestial light raining holy blasts and restoring allies.",
+    stats:{Defense:17,Strength:17,Agility:15,Intelligence:16,Perception:18,"Magic Control":17,"Technique Control":16}
+  },
+
+  "Ian": {race:"Munchkin", role:"Tank", title:"Titanbreaker", img:"ian.png",
+    melee:"The Bonkhammer — comically oversized warhammer channeling kinetic power.",
+    abilities:[["Gigaton Smash","Consecutive hammer strikes multiply in strength."],["Earthbound Tremor","Localized quakes from ground slams."],["Kinetic Absorption","Converts physical damage into strength."],["Boulder Toss","Throws massive objects effortlessly."]],
+    passives:["Mini Might — smaller HP increases strike power.","Unyielding Spirit — cannot be stunned/knocked down."],
+    ultimate:"Mountain’s Wrath — grows giant and unleashes a colossal blow reshaping the battlefield.",
+    stats:{Defense:18,Strength:20,Agility:11,Intelligence:13,Perception:14,"Magic Control":10,"Technique Control":12}
+  },
+
+  "Ivy": {race:"Sylvan Elf", role:"Support", title:"Verdant Sentinel", img:"ivy.png",
+    melee:"Bloomfang Blade — living sword that grows vines & thorns mid-swing.",
+    abilities:[["Verdant Dominion","Manipulates plants to entangle, heal, or attack."],["Floral Genesis","Instantly grows protective flora & traps."],["Beast Whisper","Commands natural creatures."],["Thorn Requiem","Vines track enemies via mana scent."]],
+    passives:["Mother Nature’s Blessing","Harmony of the Wilds"],
+    ultimate:"Eden’s Embrace — merges with forest; vines erupt, flowers heal allies, enemies ensnared.",
+    stats:{Defense:14,Strength:12,Agility:15,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":16}
+  },
+
+  "Jayson": {race:"Human (Cryo-touched)", role:"DPS", title:"Frostblade Ranger", img:"jayson.png",
+    melee:"Glacier Shuriken — enchanted self-returning ice blades.",
+    abilities:[["Cryokinesis","Control ice in all forms."],["Cryo Rebirth","Shatter into ice & reform once per battle."],["Frost Mirage","Icy clones explode into freezing mist."],["White Silence","Silences sound to boost focus & crits."]],
+    passives:["Cryo Affinity","Frozen Focus"],
+    ultimate:"Absolute Zero — freezes everything in a wide radius into suspended stillness.",
+    stats:{Defense:14,Strength:13,Agility:19,Intelligence:17,Perception:18,"Magic Control":17,"Technique Control":18}
+  },
+
+  "Jeremy": {race:"Human (Peak Condition)", role:"Hybrid", title:"Shadow Operative / Tactician", img:"jeremy.png",
+    melee:"Nocturne Arsenal — modular weapon system (tonfas, staff, blades).",
+    abilities:[["Adaptive Combat","Reads enemy patterns & evolves style."],["Tactical Vision","Analyzes weak points & flows."],["Stealth Drive","Silent invisibility bursts via tech."],["EMP Pulse","Disrupts magic & energy systems."]],
+    passives:["Prep Time Mastery","Cold Logic"],
+    ultimate:"The Apex Protocol — full combat suit & neural enhancements; predicts and counters at superhuman speed.",
+    stats:{Defense:18,Strength:16,Agility:19,Intelligence:20,Perception:20,"Magic Control":0,"Technique Control":20}
+  },
+
+  "Joshua": {race:"Human (Divinely Blessed)", role:"Support", title:"Luminary Priest", img:"joshua.png",
+    melee:"Staff of Sanctus — manifests from divine light.",
+    abilities:[["Divine Light","Celestial energy disintegrates corruption."],["Solar Restoration","Channels divine energy into others to heal."],["Judgment Ray","Concentrated beam of holy radiance."],["Blessed Radiance","Aura that weakens dark magic."]],
+    passives:["Child of Light","Faith Unbroken"],
+    ultimate:"Genesis Halo — massive holy halo floods battlefield restoring life and reshaping terrain.",
+    stats:{Defense:16,Strength:12,Agility:13,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Kiptoo": {race:"Dwarf", role:"Tank", title:"Steam Engineer / Inventor", img:"kiptoo.png",
+    melee:"Reinforced Gauntlets — punch, shock, deploy gadgets.",
+    abilities:[["Clockwork Instinct","Deploy turrets, traps, or drones."],["Steam Strike","Infuses gauntlets with pressurized steam."],["Explosive Improvisation","Throws bombs/gadgets."],["Inventor’s Insight","Genius-level improvisation in battle."]],
+    passives:["Tinker’s Reflex","Dwarven Resilience","Overclocked Mind"],
+    ultimate:"Grand Steam Overdrive — massive mechanized exosuit with steam cannons & auxiliary gadgets.",
+    stats:{Defense:18,Strength:16,Agility:12,Intelligence:20,Perception:17,"Magic Control":10,"Technique Control":20}
+  },
+
+  "Malika": {race:"Human (Witch Lineage)", role:"Hybrid", title:"Mirror Witch", img:"malika.png",
+    melee:"Crystal Wand — shatters into shards to attack or create mirrors.",
+    abilities:[["Mirror Reflection","Creates mirror clones that attack & absorb spells."],["Crystal Shard Barrage","Launches sharp crystal fragments."],["Prismatic Trap","Reflective zones that disorient."],["Refract Curse","Redirects attacks back at opponents."]],
+    passives:["Reflective Mind","Crystalline Body","Mirror Insight"],
+    ultimate:"Shattered Reality — fractures battlefield into mirrors; traps enemies in shifting illusions.",
+    stats:{Defense:14,Strength:10,Agility:15,Intelligence:20,Perception:18,"Magic Control":20,"Technique Control":17}
+  },
+
+  "Marion": {race:"Arcane Sage", role:"Support", title:"Spatial Strategist / Sage", img:"marion.png",
+    melee:"Arcane Staff — channels spatial magic for barriers & manipulation.",
+    abilities:[["Spatial Barrier","Protective zones that absorb or deflect attacks."],["Phase Step","Short-range teleportation with afterimages."],["Gravitic Pull","Alters gravity to slow or pin enemies."],["Dimensional Insight","Scans battlefield to anticipate moves."]],
+    passives:["Unmaiden Transport","Arcane Awareness","Spatial Reflex"],
+    ultimate:"Eclipse of Realms — opens spatial rift, nullifies projectiles and allows repositioning & redirection.",
+    stats:{Defense:19,Strength:12,Agility:15,Intelligence:20,Perception:19,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Mark": {race:"Dark Elf", role:"DPS", title:"Shadow Reaper", img:"mark.png",
+    melee:"Shadow Scythe — cursed blade that extends & siphons enemy energy.",
+    abilities:[["Shadow Manipulation","Shapes darkness into tendrils & weapons."],["Umbral Slash","Afterimage strikes that hit multiple times."],["Cloak of Night","Nearly invisible in dim areas."],["Nightmare Grip","Immobilizes foes with shadow tendrils."]],
+    passives:["Shadow Travel","Predator’s Focus","Umbral Resilience"],
+    ultimate:"Domain Expansion: Eternal Eclipse — dome of darkness; enemies confused & attacked by shadow constructs.",
+    stats:{Defense:14,Strength:16,Agility:18,Intelligence:17,Perception:19,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Mario": {race:"Beastman (Wolf Type)", role:"DPS", title:"Tactical Soldier", img:"mario.png",
+    melee:"Cybernetic Gauntlets — hardened for brutal punches & gadget strikes.",
+    abilities:[["Animal Instinct","Heightened senses & reflexes."],["Weapon Utilization","Mastery over any weapon."],["Overdrive Assault","Adrenaline boosts stats."],["Tactical Coordination","Enhances allied efficiency mid-battle."]],
+    passives:["Savage Core","Beast Reflexes","Military Discipline"],
+    ultimate:"Lunar Assault — taps full beast instincts & military expertise for devastating blitz.",
+    stats:{Defense:17,Strength:18,Agility:18,Intelligence:16,Perception:19,"Magic Control":10,"Technique Control":18}
+  },
+
+  "Maxwell": {race:"Elf", role:"DPS", title:"Cheerful Berserker", img:"maxwell.png",
+    melee:"Electrified Polearm — channels lightning through a polearm.",
+    abilities:[["Electrokinesis","Controls lightning."],["Thunder Therapy","Bolts of electricity to shock or heal slightly."],["Storm Dash","High speed with lightning afterimages."],["Chain Lightning","Bolt jumps between targets."]],
+    passives:["Lightning Affinity","Lightning Resistance","Berserker Spark"],
+    ultimate:"Thunderball Destruction — spins polearm in a massive storm of lightning that obliterates nearby foes.",
+    stats:{Defense:14,Strength:15,Agility:19,Intelligence:18,Perception:18,"Magic Control":19,"Technique Control":18}
+  },
+
+  "Natasha": {race:"Chronian", role:"Support", title:"Time Warden", img:"natasha.png",
+    melee:"Temporal Umbrella — shield that can deflect, rewind, or freeze projectiles.",
+    abilities:[["Chronokinesis","Manipulate time in localized areas."],["Delay Field","Temporal bubble slows enemies & projectiles."],["Time Skip","Blink short distances forward/backward in time."],["Aging Touch","Accelerate time on objects to corrode or weaken."]],
+    passives:["B.O.T — processes events faster for better reactions.","Temporal Awareness — sense attacks early."],
+    ultimate:"Chrono Collapse — freezes a zone in time for a few seconds while she moves freely; delayed effects hit when time resumes.",
+    stats:{Defense:14,Strength:10,Agility:16,Intelligence:18,Perception:16,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Nelvin": {race:"Human", role:"Tank", title:"Titan Vanguard / Tank", img:"nelvin.png",
+    melee:"Giant Axe & Great Shield — crush enemies & protect allies.",
+    abilities:[["Invincibility","Temporarily near-impervious form."],["Basic Shield Magic","Generates protective barriers."],["Ground Slam","Knocks back & staggers enemies."],["Fortitude Roar","Taunts foes while boosting allies' defense."]],
+    passives:["Rage Bait","Stand Still","Enduring Spirit"],
+    ultimate:"Colossus Rampage — unstoppable charge with wide-arc axe swings & protective shockwave.",
+    stats:{Defense:20,Strength:18,Agility:12,Intelligence:14,Perception:15,"Magic Control":10,"Technique Control":17}
+  },
+
+  "Nosim": {race:"Human", role:"Hybrid", title:"Elemental Witch", img:"nosim.png",
+    melee:"Arcane Staff — channels fire & lightning into spells & strikes.",
+    abilities:[["Pyrokinesis","Fire control."],["Electrokinesis","Manipulate electricity."],["Storm Fuse","Combine fire & lightning for area attacks."],["Mana Surge","Temporary magic & casting boost."]],
+    passives:["Elemental Affinity","Energy Conductor","Flame Resilience"],
+    ultimate:"Inferno Tempest — massive storm of fire & lightning across battlefield.",
+    stats:{Defense:14,Strength:12,Agility:16,Intelligence:19,Perception:17,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Oprah": {race:"Celestial Hybrid", role:"Support", title:"Fate Witch", img:"oprah.png",
+    melee:"Threaded Rapier — rune-etched rapier with magical thread.",
+    abilities:[["Thread Magic","Spins threads to bind or cut."],["Fate Manipulation","Alters probabilities to favor allies."],["Entangling Weave","Webs of thread immobilize foes."],["Celestial Tether","Links allies for protective buffs."]],
+    passives:["Thread Affinity","Precognitive Insight","Fatebound"],
+    ultimate:"Destiny’s Loom — spins massive tapestry of threads controlling the battlefield.",
+    stats:{Defense:15,Strength:12,Agility:16,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Pendo": {race:"Unknown", role:"Hybrid", title:"Shapeshifter", img:"pendo.png",
+    melee:"Adaptive Blades — daggers that change form with transformations.",
+    abilities:[["Transformation Magic","Shift into animal/humanoid/elemental forms."],["Illusionary Magic","Creates realistic illusions."],["Phantom Strike","Combines illusions & transformed limbs for surprise strikes."],["Mirror Clone","Summons illusory duplicates that copy actions."]],
+    passives:["Perfect Mimicry","Adaptive Reflexes","Trickster’s Luck"],
+    ultimate:"Pandemonium Realm — warped battlefield of overlapping illusions; Pendo gains extreme mobility & unpredictability.",
+    stats:{Defense:12,Strength:14,Agility:18,Intelligence:17,Perception:17,"Magic Control":19,"Technique Control":18}
+  },
+
+  "Praveen": {race:"Mystic Elf", role:"Hybrid", title:"Copycat Mage", img:"praveen.png",
+    melee:"Arcane Scepter — channels imitation magic and copied spells.",
+    abilities:[["Imitation Magic","Temporarily copy any observed magical ability."],["Spell Reflection","Reflect enemy spells back, stronger if recently copied."],["Echo Strike","Mimic enemy moves with perfect timing."],["Mirror Veil","Creates duplicates to amplify copied abilities."]],
+    passives:["Adaptive Caster","Memory Recall","Arcane Reflexes"],
+    ultimate:"Archmage Replica — duplicates enemy spell patterns and casts them against foes with enhanced control.",
+    stats:{Defense:12,Strength:10,Agility:16,Intelligence:19,Perception:17,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Sharlene": {race:"Unknown Human Variant", role:"Support", title:"Karma Witch", img:"sharlene.png",
+    melee:"Enchanted Focus Rod — channels karma magic to punish or reward.",
+    abilities:[["Karma Strike","Damage proportional to target’s misdeeds."],["Karmic Shield","Absorbs & reflects proportional energy."],["Balance Wave","Buffs or debuffs based on actions."],["Retributive Bind","Chains enemies' actions to past moves."]],
+    passives:["Moral Compass","Fate Link","Karmic Resilience"],
+    ultimate:"Judgment’s Weave — karmic field that punishes misdeeds & buffs allies proportionally.",
+    stats:{Defense:14,Strength:12,Agility:15,Intelligence:18,Perception:17,"Magic Control":20,"Technique Control":16}
+  },
+
+  "Shirleen": {race:"Human", role:"Support", title:"Seer Witch", img:"shirleen.png",
+    melee:"Crystal Focus Orb — projects visions & time-magic.",
+    abilities:[["Vision of Past","Reveals hidden past events."],["Vision of Present","Detects hidden enemies & traps."],["Vision of Future","Predicts moves seconds ahead."],["Arcane Bolt","Quick magical projectile."]],
+    passives:["Clairvoyant Insight","Time Sense","Foresight Resilience"],
+    ultimate:"Chrono Nexus — temporal field granting allies foresight reflexes while slowing/misdirecting enemies.",
+    stats:{Defense:12,Strength:10,Agility:16,Intelligence:20,Perception:19,"Magic Control":20,"Technique Control":18}
+  },
+
+  "Stanley": {race:"Human", role:"Hybrid", title:"Alchemist", img:"stanley.png",
+    melee:"Reinforced Alchemist Rod — channels potions for explosive/healing effects.",
+    abilities:[["Potion Crafting","Brew offensive/defensive/utility potions mid-battle."],["Elixir Toss","Throw potions that heal or damage."],["Alchemy Infusion","Temporarily enhance weapons or allies."],["Basic Elemental Blast","Minor elemental spells."]],
+    passives:["Quick Brew","Resourceful Mind","Chemical Affinity"],
+    ultimate:"Transmutation Surge — massive alchemical explosion or mass enhancement; allies gain huge buffs while enemies suffer elemental effects.",
+    stats:{Defense:13,Strength:12,Agility:14,Intelligence:19,Perception:16,"Magic Control":18,"Technique Control":17}
+  },
+
+  "Starwonder": {race:"Gnome", role:"Support", title:"Dreamweaver", img:"starwonder.png",
+    melee:"Stardust Staff — channels daydream-based magic.",
+    abilities:[["Daydream Projection","Turns imagination into temporary illusions."],["Whimsical Shield","Creates playful barriers from dream energy."],["Somnolent Touch","Puts enemies to sleep briefly."],["Fantasy Burst","Dream energy projectiles."]],
+    passives:["Imaginative Mind","Dreamer’s Luck","Whimsical Agility"],
+    ultimate:"Nightmare Mirage — floods battlefield with her dream world; enemies disoriented while allies gain buffs.",
+    stats:{Defense:11,Strength:10,Agility:16,Intelligence:17,Perception:16,"Magic Control":18,"Technique Control":15}
+  },
+
+  "Victor": {race:"Human", role:"Hybrid", title:"Toxic Mage", img:"victor.png",
+    melee:"Poisoned Dagger — coated with magical toxins that corrode armor or poison enemies.",
+    abilities:[["Toxikinesis","Manipulates poisons & toxins mid-air or coating weapons."],["Venom Cloud","Creates toxic mist that damages & weakens enemies over time."],["Corrosive Strike","Infuses melee attacks with potent poison."],["Poison Recovery","Absorb minor toxins to heal/empower self."]],
+    passives:["Poison Resistance","Adaptive Toxin","Toxic Insight"],
+    ultimate:"Neurotoxic Cataclysm — saturates battlefield with deadly toxins; enemies weakened & slowed while he gains enhanced reflexes.",
+    stats:{Defense:13,Strength:14,Agility:15,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":16}
+  },
+
+  "Walter": {race:"Dwarf", role:"Tank", title:"Earth Bender", img:"walter.png",
+    melee:"Stone Hammer — massive hammer channeling geokinetic energy.",
+    abilities:[["Geokinesis","Manipulate earth, stone & minerals."],["Seismic Slam","Smash ground creating shockwaves."],["Stone Armor","Encases himself in hardened rock."],["Quake Fist","Launch boulders or crush enemies."]],
+    passives:["Earth Affinity","Stability","Miner’s Insight"],
+    ultimate:"Cataclysmic Quagmire — raises earth pillars & fissures that crush enemies and reshape battlefield.",
+    stats:{Defense:18,Strength:17,Agility:12,Intelligence:16,Perception:15,"Magic Control":18,"Technique Control":17}
+  },
+
+  "Wayne": {race:"Unknown", role:"DPS", title:"Sonokinetic", img:"wayne.png",
+    melee:"Sonic Chakrams — circular returning blades infused with sonic magic.",
+    abilities:[["Sonokinesis","Manipulate sound waves for offense & disruption."],["Sonic Boom","Concussive waves that stagger enemies."],["Echo Strike","Uses sound to track & anticipate movement."],["Vibration Pulse","Shakes terrain or enemy equipment with resonance."]],
+    passives:["Auditory Reflexes","Sound Immunity","Resonance Boost"],
+    ultimate:"Resonant Cataclysm — floods area with amplified sonic waves; structures crumble & enemies disoriented.",
+    stats:{Defense:12,Strength:14,Agility:17,Intelligence:16,Perception:18,"Magic Control":19,"Technique Control":17}
+  },
+
+  "Zena": {race:"Unknown", role:"Support", title:"Sealing Witch", img:"zena.png",
+    melee:"Enchanted Scrolls — inscribe and release seals instantly.",
+    abilities:[["Seal Magic","Bind objects, enemies, or magic with runic seals."],["Unseal Release","Break seals to trigger effects."],["Runic Trap","Place seals to restrict movement."],["Mana Lock","Limits enemy spellcasting in sealed area."]],
+    passives:["Seal Affinity","Quick Sigil","Mana Channel"],
+    ultimate:"Eternal Binding — multi-layered seal that immobilizes & weakens enemies while absorbing/redirecting incoming magic.",
+    stats:{Defense:14,Strength:12,Agility:13,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
+  }
+}; // end heroes object
+
+/* ---------------------------
+   Helper: color mapping for placeholders
+   --------------------------- */
+const roleColor = role => {
+  switch(role){
+    case 'DPS': return getCssVar('--dps');
+    case 'Support': return getCssVar('--support');
+    case 'Tank': return getCssVar('--tank');
+    case 'Hybrid': return getCssVar('--hybrid');
+    default: return getCssVar('--hybrid');
+  }
+};
+function getCssVar(name){
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#9b7bff';
+}
+
+/* ---------------------------
+   Generate SVG placeholder (data URL) by name & role color
+   --------------------------- */
+function generatePlaceholder(name, role){
+  const initials = name.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+  const bg = roleColor(role) || '#6b46c1';
+  const fg = '#021024';
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
+    <defs>
+      <linearGradient id='g' x1='0' x2='1'>
+        <stop offset='0' stop-color='${bg}' stop-opacity='0.95'/>
+        <stop offset='1' stop-color='#071026' stop-opacity='0.85'/>
+      </linearGradient>
+      <filter id='grain'><feTurbulence baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/></filter>
+    </defs>
+    <rect width='100%' height='100%' fill='url(#g)'/>
+    <g opacity='0.08' filter='url(#grain)'><rect width='100%' height='100%' fill='#fff'/></g>
+    <text x='50%' y='46%' font-family='Inter, Arial, sans-serif' font-size='160' fill='${fg}' text-anchor='middle' dominant-baseline='middle' font-weight='800'>${escapeXml(initials)}</text>
+    <text x='50%' y='72%' font-family='Inter, Arial, sans-serif' font-size='28' fill='${fg}' text-anchor='middle' dominant-baseline='middle'>${escapeXml(name)}</text>
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+function escapeXml(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+
+/* ---------------------------
+   Build the grid alphabetically
+   --------------------------- */
+const grid = document.getElementById('heroesGrid');
+Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
+  const h = heroes[name];
+  const article = document.createElement('article');
+  article.className = 'card';
+  article.dataset.hero = name;
+  article.dataset.role = h.role || 'Hybrid';
+
+  // set a custom pulse size (subtle variety)
+  article.style.setProperty('--pulse-size', `${40 + Math.floor(Math.random()*30)}px`);
+
+  // markup
+  article.innerHTML = `
+    <div class="portrait">
+      <img src="${h.img}" alt="${name} portrait" onerror="this.onerror=null; this.src = generatePlaceholder('${escapeJs(name)}','${escapeJs(h.role)}')">
+    </div>
+    <div class="info">
+      <div class="hero-meta">
+        <div class="hero-name">${escapeHtml(name)}</div>
+        <div class="hero-desc">${escapeHtml(h.title)} • ${escapeHtml(h.race)}</div>
+      </div>
+      <div class="role-badge">${escapeHtml(h.role)}</div>
+    </div>
+  `;
+  grid.appendChild(article);
+});
+
+/* add a couple of coming soon cards */
+for(let i=0;i<2;i++){
+  const placeholder = document.createElement('article');
+  placeholder.className='card';
+  placeholder.innerHTML = `<div class="portrait"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted)"><div style="width:64px;height:64px;border-radius:999px;background:linear-gradient(135deg,#08112b,#140320);display:flex;align-items:center;justify-content:center;font-weight:800">?</div><div>Coming Soon</div></div></div></div><div class="info"><div class="hero-meta"><div class="hero-name">Coming Soon</div><div class="hero-desc">New legend</div></div><div class="role-badge">TBD</div></div>`;
+  grid.appendChild(placeholder);
+}
+
+/* ---------------------------
+   Modal behavior: sleek details on click
+   --------------------------- */
+const overlay = document.getElementById('overlay');
+const sheet = document.getElementById('sheet');
+
+grid.addEventListener('click', (e)=>{
+  const card = e.target.closest('.card');
+  if(!card) return;
+  const name = card.dataset.hero;
+  if(!name) return;
+  const h = heroes[name];
+  if(!h) return;
+
+  // build abilities html (compact)
+  const abilitiesHtml = (h.abilities || []).map(a => `<div class="ability"><strong>${escapeHtml(a[0])}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(a[1])}</div></div>`).join('');
+  const passivesHtml = (h.passives || []).map(p=>`<li>${escapeHtml(p)}</li>`).join('');
+  const statsHtml = Object.entries(h.stats || {}).map(([k,v])=>`<div class="stat"><b>${v}</b><div style="font-size:11px;color:var(--muted)">${escapeHtml(k)}</div></div>`).join('');
+
+  sheet.innerHTML = `
+    <div class="sheet-top">
+      <div class="sheet-img"><img src="${h.img}" alt="${escapeHtml(name)} large" onerror="this.onerror=null;this.src=generatePlaceholder('${escapeJs(name)}','${escapeJs(h.role)}')"></div>
+      <div class="sheet-right">
+        <h2>${escapeHtml(name)}</h2>
+        <div class="muted">${escapeHtml(h.title)} • ${escapeHtml(h.race)}</div>
+        <p><strong>Role:</strong> ${escapeHtml(h.role)}</p>
+        <p><strong>Melee:</strong> ${escapeHtml(h.melee || '')}</p>
+        <div class="stat-row">${statsHtml}</div>
+      </div>
+    </div>
+    <div class="abilities"><h3 style="margin:8px 0 8px;color:var(--accent)">Abilities</h3>${abilitiesHtml}</div>
+    <div class="ultimate"><h3 style="margin:8px 0 6px;color:var(--accent)">Ultimate</h3><p style="margin:0;color:var(--muted)">${escapeHtml(h.ultimate || '')}</p></div>
+    <div style="margin-top:12px" class="passives"><h3 style="margin:8px 0 6px;color:var(--accent)">Passives</h3><ul>${passivesHtml}</ul></div>
+    <div style="display:flex;justify-content:flex-end"><div class="close-btn" id="closeBtn">Close</div></div>
+  `;
+  overlay.classList.add('show');
+  overlay.setAttribute('aria-hidden','false');
+
+  document.getElementById('closeBtn').onclick = closeModal;
+});
+
+// close on background click
+overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+function closeModal(){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); }
+
+/* ---------------------------
+   Utility: escaping & helpers
+   --------------------------- */
+function escapeHtml(s){ if(typeof s!=='string') return s; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+function escapeJs(s){ return String(s).replaceAll("'", "\\'").replaceAll('"','\\"'); }
+
+</script>
+</body>
+</html>
