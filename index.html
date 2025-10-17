@@ -21,10 +21,17 @@
     --glass: rgba(255,255,255,0.03);
     --radius:14px;
     --accent: #8be0ff;
-    --dps: #ff8a50;
-    --support: #37d1ff;
-    --tank: #ffd166;
-    --hybrid: #c07bff;
+  /* Starting roles colors */
+    --assassin: #000000;
+    --dps: #000cad;
+    --support: #b700ff;
+    --healer: #00e1ff;
+    --mage: #ff00f6;
+    --tank: #009614;
+    --witch: #ff0000;
+    --hero: #fffb00;
+    --alchemist: #20004b;
+  /* Pulse settings */
     --pulse-duration: 2.6s;
   }
 
@@ -71,7 +78,7 @@
     box-shadow: 0 10px 30px rgba(2,6,23,0.6);
     display:flex;flex-direction:column;height:320px;position:relative;border:1px solid rgba(255,255,255,0.03);
     backdrop-filter: blur(2px);
-  }
+  }Fatebound
 
   .portrait{height:200px;background:linear-gradient(180deg,#030414,#081832);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .portrait img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
@@ -85,10 +92,16 @@
   .role-badge{font-size:12px;padding:6px 8px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--muted)}
 
   /* neon glows per role with breathing pulse */
+  .card[data-role="Assassin"]{--glow: var(--assassin)}
   .card[data-role="DPS"]{--glow: var(--dps)}
   .card[data-role="Support"]{--glow: var(--support)}
+  .card[data-role="Healer"]{--glow: var(--healer)}
+  .card[data-role="Mage"]{--glow: var(--mage)}
   .card[data-role="Tank"]{--glow: var(--tank)}
-  .card[data-role="Hybrid"]{--glow: var(--hybrid)}
+  .card[data-role="Witch"]{--glow: var(--witch)}
+  .card[data-role="Hero"]{--glow: var(--hero)}
+  .card[data-role="Alchemist"]{--glow: var(--alchemist)}
+  
 
   .card::after{
     content:"";position:absolute;left:0;right:0;bottom:0;top:0;border-radius:var(--radius);
@@ -152,10 +165,15 @@
 
   <main>
     <div class="legend" aria-hidden="true">
+      <div class="chip"><span class="swatch" style="background:var(--assassin)"></span> Assassin</div>
       <div class="chip"><span class="swatch" style="background:var(--dps)"></span> DPS</div>
       <div class="chip"><span class="swatch" style="background:var(--support)"></span> Support</div>
+      <div class="chip"><span class="swatch" style="background:var(--healer)"></span> Healer</div>
+      <div class="chip"><span class="swatch" style="background:var(--mage)"></span> Mage</div>
       <div class="chip"><span class="swatch" style="background:var(--tank)"></span> Tank</div>
-      <div class="chip"><span class="swatch" style="background:var(--hybrid)"></span> Hybrid</div>
+      <div class="chip"><span class="swatch" style="background:var(--witch)"></span> Witch</div>
+      <div class="chip"><span class="swatch" style="background:var(--hero)"></span> Hero</div>
+      <div class="chip"><span class="swatch" style="background:var(--alchemist)"></span> Alchemist</div>
     </div>
 
     <section class="intro">
@@ -175,7 +193,7 @@
    FULL HERO DATA (all characters)
    --------------------------- */
 const heroes = {
-  "Carlos": {race:"Dark Elf", role:"DPS", title:"Shadow Assassin",
+  "Carlos": {race:"Dark Elf", role:"Assassin", title:"Shadow Assassin",
     melee:"Dual Daggers (Shadowfangs) — can phase through matter for sneak attacks.",
     abilities:[["Umbrakinesis","Manipulate and solidify shadows into weapons or clones. The darker the area, the stronger his strikes."],["Cloaking","Blend with shadows to become invisible briefly; breaks if he attacks or is hit by light or sound magic."],["Nightstep","Short-range teleport between shadowed spots. Can chain if stamina allows."]],
     passives:["Darkness Buff — +25% attack speed & agility at night or in dimly lit areas.","Predator’s Focus — The longer he stalks a target without being detected, the higher his critical strike rate grows."],
@@ -183,7 +201,7 @@ const heroes = {
     stats:{Strength:11,Agility:19,Defense:9,Intelligence:18,Perception:19,"Magic Power":17,"Technique Control":20}
   },
 
-  "Catherine": {race:"Seraph-Blessed Human", role:"Support", title:"Aquamancer Cleric",
+  "Catherine": {race:"Seraph-Blessed Human", role:"Healer", title:"Aquamancer Cleric",
     melee:"Sacred Grimoire – “Canticle of Tides” — floating hymnbook that amplifies voice-based spells. Pages shimmer with holy runes and ripple like water when opened.",
     abilities:[["Sound Magic – Harmonic Resonance","Uses melodies to heal allies or shatter enemies’ focus. The tone determines the effect — soothing for healing, high-pitched for disruption."],["Hydrokinesis","Manipulates water into healing waves, barriers, or whips. Holy-infused water purifies curses and burns shadow creatures."],["Luminous Baptism","Mid-level spell that releases a wave of radiant water, cleansing debuffs and dealing holy splash damage to enemies."]],
     passives:["Praise Buff — Allies near Catherine gain minor HP regen and boosted morale when she sings or chants.","Blessed Flow — Healing abilities scale with her current mana flow, giving her more potent heals when her own HP is high.","Congregation Aura — The more allies within her radius, the stronger her healing and sound amplification become."],
@@ -191,7 +209,7 @@ const heroes = {
     stats:{Strength:10,Agility:14,Defense:13,Intelligence:19,Perception:17,"Magic Power":20,"Technique Control":18}
   },
 
-  "Cherise": {race: "Elf Hybrid", role: "Hybrid", title: "Arcane Artiste",
+  "Cherise": {race: "Elf Hybrid", role: "Mage", title: "Arcane Artiste",
     melee: "Enchanted Paintbrush & Palette — conjures weapons, barriers, or animate creations with every stroke.",
     abilities: [["Art Magic","Turns colours and brushstrokes into magical effects / constructs."],["Living Canvas","Summons animated creations from paintings to fight or defend."],["Prismatic Veil","Bends colour to create illusions or hide allies."],["Creative Distortion","Warps small areas of reality using paint-magic."],["Chromatic Surge","Unleashes a burst of radiant colour energy, dealing AOE damage and stunning enemies briefly."]],
     passives: ["Inspire — boosts allies' morale, attack & magic output.","Passion — Her magical output grows stronger when emotionally charged or excited.","Spirit Palette — Residual energy empowers her creations, making them stronger the longer they stay active.","Muse’s Glow — Reveals hidden or invisible enemies affected by her magic."],
@@ -207,7 +225,7 @@ const heroes = {
     ultimate: "Eye of the Tempest — David becomes the calm center of a massive spiral storm. Inside the domain, his speed doubles, and every movement creates slicing wind rings that move independently. Enemies caught inside are buffeted by invisible slashes while he flickers through them faster than sight."
 },
 
-  "Dominion": {race: "Archon-Born", role: "Hybrid", title: "Dimensional Summoner", img: "dominion.jpg",
+  "Dominion": {race: "Archon-Born", role: "Mage", title: "Dimensional Summoner", img: "dominion.jpg",
     melee: "Arcane Grimoire — Codex of Realms; channels summoning seals.",
     abilities: [["Summoning Arts","Calls forth entities from his private realm: elemental beasts, spectral guardians, or constructs of pure energy. Each summon has its own trait (tank, striker, mage, scout, etc.)."],["Pocket Dimension","Opens or manipulates his private dimension for storage, travel, or isolation. He can trap enemies or shelter allies in it temporarily."],["Spatial Shift","Teleports to any marked summon’s position or swaps two entities mid-battle."],["Binding Sigils","Engraves glowing runes that boost his summons’ power or restrain foes within an area."]],
     passives: ["Absolute Control — Dominion maintains total synchronization with his summons, directing several simultaneously without concentration loss.","Dimensional Awareness — Instinctively detects distortions, teleportation traces, or spatial anomalies.","Arcane Resonance — Each active summon strengthens his dimensional stability and boosts all his magic efficiency."],
@@ -224,7 +242,7 @@ const heroes = {
 },
 
 
- "Gift": {race: "Human (Cursed Lineage)", role: "Hybrid", title: "Blood Witch", img: "giftpg",
+ "Gift": {race: "Human (Cursed Lineage)", role: "Witch", title: "Blood Witch", img: "giftpg",
     melee: "Grimoire-Wand Hybrid — amplifies her spells through floating crimson sigils and channelled curses.",
     abilities: [["Hemocraft","Converts her blood into mana to amplify magic or heal allies at the cost of her own vitality."],["Scarlet Bind","Conjures chains of solidified blood energy that immobilize and drain enemies."],["Witchfire Bloom","Erupts a field of crimson flames that consume magic energy, weakening spellcasters."],["Sanguine Mirage","Creates illusions from blood mist that echo her attacks for a few seconds, confusing opponents."]],
     passives: ["Crimson Catalyst — spells grow stronger the more blood she expends.","Witch’s Insight — enhances magical perception, allowing her to read and anticipate enemy spell formations."],
@@ -233,7 +251,7 @@ const heroes = {
 },
 
 
-  "Gianna": {race:"Beastman (Feline Type)", role:"DPS", title:"Tech Predator",
+  "Gianna": {race:"Beastman (Feline Type)", role:"Support", title:"Tech Predator",
     melee:"Enhanced Claw Gauntlets — reinforced with mana circuits, sparking with stored energy during slashes.",
     abilities:[["Animal Instinct","Heightened senses and reaction time; can sense danger or ambushes before they happen."],["Savage Blitz","Rapid claw combo infused with static mana that tears through armor and disrupts mana flow."],["Overdrive Rush","Channels raw adrenaline and electricity to boost all physical stats for a short time."],["Hunter’s Pounce","Leaps at enemies with crushing force, stunning and shocking them on impact."]],
     passives:["Savage Core — The lower her HP, the stronger and faster she becomes.","Techblood — Instinctively fuses mana with machinery, repairing and upgrading gear mid-battle without thinking.","Beast Reflexes — Reacts to threats with superhuman speed, dodging or countering attacks almost instinctively."],
@@ -242,7 +260,7 @@ const heroes = {
 },
 
 
- "Gregory": {race:"Celestial (Half-Angel)", role:"Tank", title:"Divine Hero",
+ "Gregory": {race:"Celestial (Half-Angel)", role:"Hero", title:"Divine Hero",
     melee:"Lumisblade — a radiant sword forged from condensed light, capable of cutting through darkness and purifying corruption.",
     passives:["Hero’s Resolve — Damage increases when protecting allies or standing against evil.","Divine Presence — Naturally boosts allies’ morale and weakens nearby enemies through sheer aura."],
     stats:{Defense:17,Strength:17,Agility:15,Intelligence:16,Perception:18,"Magic Control":17,"Technique Control":16},
@@ -250,7 +268,7 @@ const heroes = {
 },
 
 
-  "Ian": {race:"Munchkin", role:"Tank", title:"Titanbreaker",
+  "Ian": {race:"Munchkin", role:"dps", title:"Titanbreaker",
     melee:"The Bonkhammer — comically oversized warhammer channeling raw kinetic energy, causing the ground to ripple with every swing.",
     abilities:[["Gigaton Smash","Every hammer strike multiplies in power with consecutive hits, generating shockwaves."],["Earthbound Tremor","Slams the ground to create localized quakes that throw enemies off balance."],["Kinetic Absorption","Converts incoming physical damage into strength boosts."],["Boulder Toss","Picks up and throws absurdly large objects with ease."]],
     passives:["Mini Might — The smaller his HP, the stronger his hits.","Unyielding Spirit — Cannot be stunned or knocked down; his tenacity literally defies physics."],
@@ -277,7 +295,7 @@ const heroes = {
 },
 
 
-  "Jeremy": {race:"Human (Peak Condition)", role:"Hybrid", title:"Shadow Tactician",
+  "Jeremy": {race:"Human (Peak Condition)", role:"dps", title:"Optimum Tactician",
     melee:"Nocturne Arsenal — an adaptive modular weapon forged from enchanted alloys and forgotten tech. It seamlessly shifts between dual tonfas, a collapsible staff, or short blades. Each strike feeds kinetic energy into its core, storing power to unleash counterattacks with surgical, bone-rattling precision.",
     abilities:[["Adaptive Combat","Effortlessly deciphers enemy fighting patterns in real time, reshaping his style to match and overwhelm. Every move against him is another line in a book he’s already reading ahead of you."],["Tactical Vision","Custom combat lenses scan weak points, mana flow, and trajectory paths with microscopic accuracy, turning every blink into a battle calculation."],["Stealth Drive","Pure science, zero magic. He slips into utter silence and optical invisibility, striking before you even realize the lights dimmed."], ["EMP Pulse","Releases a condensed energy burst that fries mana circuits and nullifies magic-based systems in the area, dragging mages down to his playing field."]],
     passives:["Prep Time Mastery — The more information he gathers, the deadlier he becomes. Knowledge isn’t just power, it’s a loaded weapon in his hands.","Cold Logic — Fear? Panic? Irrational impulse? Deleted. Every thought is filtered through tactical computation.","Kinetic Reflexes — Converts absorbed kinetic force into bursts of inhuman speed and strength, turning your own hits into your worst mistake."],
@@ -286,7 +304,7 @@ const heroes = {
 },
 
 
- "Joshua": {race:"Human (Divinely Blessed)", role:"Support", title:"Luminary Priest",
+ "Joshua": {race:"Human (Divinely Blessed)", role:"Healer", title:"Luminary Priest",
     melee:"Staff of Sanctus — manifests from divine light, glowing brighter the purer his intent.",
     abilities:[["Divine Light","Celestial energy disintegrates corruption and curses."],["Solar Restoration","Channels divine energy into others to heal and purify."],["Judgment Ray","Calls down a concentrated beam of holy radiance."],["Blessed Radiance","Aura that weakens dark magic and strengthens allies."]],
     passives:["Child of Light — Divine energy constantly regenerates him, no matter the wound.","Faith Unbroken — Immune to corruption, fear, and possession; light only shines brighter in darkness."],
@@ -303,7 +321,7 @@ const heroes = {
     ultimate:"Grand Steam Overdrive — Kiptoo climbs into a mechanized exosuit, boosting strength, defense, and technique. Fires steam cannons, deploys shields, and floods the battlefield with auxiliary gadgets until energy burns out."
 },
 
-  "Malika": {race:"Human (Witch Lineage)", role:"Hybrid", title:"Mirror Witch",
+  "Malika": {race:"Human (Witch Lineage)", role:"Witch", title:"Mirror Witch",
     melee:"Crystal Wand — shatters into razor-edged shards to attack, reflect magic, or conjure mirror doubles for deception and control.",
     abilities:[["Mirror Reflection","Summons mirror clones that mimic her movements, attack, and absorb spells."],["Crystal Shard Barrage","Launches high-velocity crystal fragments that slice through armor and barriers."],["Prismatic Trap","Casts reflective zones that disorient, blind, and confuse enemies."],["Refract Curse","Bends or redirects enemy attacks back at their source, amplifying impact."]],
     passives:["Reflective Mind — Anticipates attacks through mirrored reflections.","Crystalline Body — Gains damage resistance as magic hardens around her.","Mirror Insight — Detects hidden enemies or illusions via reflective distortions."],
@@ -312,7 +330,7 @@ const heroes = {
 },
 
 
-  "Marion": {race:"Arcane Sage", role:"Support", title:"Spatial Sage",
+  "Marion": {race:"Arcane Sage", role:"Mage", title:"Spatial Sage",
     melee:"Arcane Staff — channels spatial magic to erect shimmering barriers, bend trajectories, and reshape the battlefield with surgical precision.",
     abilities:[["Spatial Barrier","Generates shimmering zones that absorb, deflect, and redirect incoming attacks while shielding allies."],["Phase Step","Short-range teleportation with flickering afterimages to evade or reposition with precision."],["Gravitic Pull","Bends gravity in a targeted area, slowing or pinning enemies without damaging terrain."],["Dimensional Insight","Reads battlefield flow, predicts enemy actions, and turns terrain itself into a strategic weapon."]],
     passives:["Unmaiden Transport — Opens controlled rifts to safely reposition allies.","Arcane Awareness — Constantly senses traps, hidden threats, and distortions across the map.","Spatial Reflex — Accelerated reaction time under pressure, allowing flawless evasion and countering."],
@@ -320,7 +338,7 @@ const heroes = {
     ultimate:"Eclipse of Realms — Marion tears open a colossal spatial rift above the battlefield. Enemies are slowed, projectiles nullified, and allies gain free movement through warped space. Layers of gravitational zones crush enemy formations while Marion controls positioning like a celestial puppeteer."
 },
 
-"Mark": {race: "Dark Elf", role: "DPS", title: "Shadow Reaper",
+"Mark": {race: "Dark Elf", role: "Assassin", title: "Shadow Reaper",
   melee: "Shadow Scythe — a cursed blade that can extend, phase through matter, and siphon energy from enemies.",
   abilities: "Shadow Manipulation — shape darkness into weapons, tendrils, or barriers; Umbral Slash — afterimage strikes hit multiple times or confuse foes; Cloak of Night — near-invisibility in dim or dark areas; Nightmare Grip — immobilizes enemies with shadow tendrils.",
   passives: "Shadow Travel — short-distance teleport through shadows; Predator’s Focus — higher crit chance when stalking unseen; Umbral Resilience — reduced damage in darkness.",
@@ -328,7 +346,7 @@ const heroes = {
   ultimate: "Domain Expansion: Eternal Eclipse — a massive dome of darkness where only Mark can see; enemies are disoriented and attacked by shadow constructs as his power surges."
 },
 
-  "Mario": {race: "Beastman (Wolf Type)", role: "DPS", title: "Tactical Soldier",
+  "Mario": {race: "Beastman (Wolf Type)", role: "Tank", title: "Tactical Commander",
   melee: "Cybernetic Gauntlets — enhanced for both brutal punches and gadget-assisted strikes; can amplify force, shock, or grapple enemies. Combat Style: Expert frontline fighter combining animal instincts with military training; strikes fast, reads the battlefield, and adapts mid-combat.",
   abilities: "Animal Instinct — heightened senses & reflexes; Weapon Utilization — mastery over any weapon; Overdrive Assault — adrenaline boost to stats; Tactical Coordination — enhances allies’ efficiency.",
   passives: "Savage Core — stronger at low HP; Beast Reflexes — auto dodges in range; Military Discipline — boosted endurance & focus.",
@@ -344,7 +362,7 @@ const heroes = {
   ultimate: "Thunderball Destruction — Maxwell spins his polearm in a massive lightning storm that obliterates everything close, leaving the battlefield crackling."
 },
 
-  "Natasha": {race: "Chronian", role: "Support", title: "Time Warden",
+  "Natasha": {race: "Chronian", role: "Mage", title: "Time Warden",
   melee: "Temporal Umbrella — a shield-weapon hybrid that can deflect, rewind, or freeze projectiles momentarily.",
   abilities: "Chronokinesis — manipulate time flow in localized zones; Delay Field — temporal bubble slows enemies and projectiles; Time Skip — blink forward or backward in time; Aging Touch — accelerate time to corrode or weaken objects.",
   passives: "B.O.T — processes events faster for sharper reactions; Temporal Awareness — senses attacks moments before impact.",
@@ -360,7 +378,7 @@ const heroes = {
   ultimate: "Colossus Rampage — Nelvin charges forward, swinging his axe in wide arcs while shielded, crushing enemies and creating a protective shockwave for allies."
 },
 
- "Nosim": {race: "Human", role: "Hybrid", title: "Elemental Witch",
+ "Nosim": {race: "Human", role: "Witch", title: "Elemental Witch",
   melee: "Arcane Staff — channels fire and lightning for ranged spells or enhanced close combat strikes.",
   abilities: "Pyrokinesis — control over fire; Electrokinesis — manipulation of electricity; Storm Fuse — combining fire and lightning for devastating area attacks; Mana Surge — temporary magic and casting boost.",
   passives: "Elemental Affinity — enhanced fire and lightning efficiency; Energy Conductor — lightning bounces between targets; Flame Resilience — reduced fire and electric damage.",
@@ -368,7 +386,7 @@ const heroes = {
   ultimate: "Inferno Tempest — a massive storm of fire and lightning sweeps across the battlefield, scorching and electrocuting enemies for 15–20 seconds."
 },
 
- "Oprah": {race:"Celestial Hybrid", role:"Support", title:"Fate Witch", img:"oprah.jpg",
+ "Oprah": {race:"Celestial Hybrid", role:"Witch", title:"Fate Witch", img:"oprah.jpg",
     melee:"Threaded Rapier — a slender, rune-etched rapier with a hidden spool of magical thread; can bind, slice, or manipulate foes at close-to-mid range.",
     abilities:[["Thread Magic","Spins threads to bind, cut, or construct."],["Fate Manipulation","Alters small probabilities to aid allies or hamper foes."],["Entangling Weave","Conjures webs of thread to immobilize foes."],["Celestial Tether","Links allies with protective threads."]],
     passives:["Thread Affinity — Thread-based attacks are faster, stronger, and more precise.","Precognitive Insight — Can sense imminent danger or traps before they happen.","Fatebound — Minor buffs/debuffs automatically activate in response to battlefield conditions."],
@@ -376,7 +394,7 @@ const heroes = {
     stats:{Defense:15,Strength:12,Agility:16,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
   },
 
-  "Pendo": {race:"Unknown", role:"Hybrid", title:"Shapeshifter", img:"pendo.jpg",
+  "Pendo": {race:"Unknown", role:"Mage", title:"Shapeshifter", img:"pendo.jpg",
     melee:"Adaptive Blades — lightweight, versatile daggers that can change shape or properties depending on Pendo’s transformations and illusions.",
     abilities:[["Transformation Magic","Can temporarily shift into other forms (animal, humanoid, elemental) to gain new abilities or stealth."],["Illusionary Magic","Creates realistic illusions to confuse, misdirect, or frighten enemies."],["Phantom Strike","Combines illusions and transformed limbs to strike from unpredictable angles."],["Mirror Clone","Summons illusory duplicates that copy her actions for brief bursts, overwhelming enemies."]],
     passives:["Perfect Mimicry — Can perfectly imitate skills, voices, or movements of anyone she sees.","Adaptive Reflexes — Gains small agility and dodge boosts whenever using transformations or illusions.","Trickster’s Luck — Random chance to auto-evade or counter minor attacks."],
@@ -384,7 +402,7 @@ const heroes = {
     stats:{Defense:12,Strength:14,Agility:18,Intelligence:17,Perception:17,"Magic Control":19,"Technique Control":18}
 },
 
-  "Praveen": {race:"Mystic Elf", role:"Hybrid", title:"Copycat Mage", img:"praveen.jpg",
+  "Praveen": {race:"Mystic Elf", role:"Mage", title:"Copycat Mage", img:"praveen.jpg",
     melee:"Arcane Scepter — a sleek, rune-etched staff that channels his imitation magic and can cast or mimic other spells with precision.",
     abilities:[["Imitation Magic","Can temporarily copy any magical ability he observes, using it with slightly reduced potency."],["Spell Reflection","Reflects an enemy spell back at them, enhanced if it’s one he has copied recently."],["Echo Strike","Mimics an enemy’s combat move with perfect timing, striking from an unexpected angle."],["Mirror Veil","Creates magical duplicates that confuse foes and amplify his copied abilities."]],
     passives:["Adaptive Caster — Gains small boosts to magic control and intelligence whenever copying new spells.","Memory Recall — Can perfectly retain any observed spell for a limited duration.","Arcane Reflexes — Automatically reacts to magic attacks faster than normal, thanks to his imitation instincts."],
@@ -392,7 +410,7 @@ const heroes = {
     stats:{Defense:12,Strength:10,Agility:16,Intelligence:19,Perception:17,"Magic Control":20,"Technique Control":18}
 },
 
-  "Sharlene": {race:"Unknown Human Variant", role:"Support", title:"Karma Witch", img:"sharlene.jpg",
+  "Sharlene": {race:"Unknown Human Variant", role:"Witch", title:"Karma Witch", img:"sharlene.jpg",
     melee:"Enchanted Focus Rod — a short staff engraved with karmic runes; channels karma magic to punish or reward based on actions.",
     abilities:[["Karma Strike","Inflicts damage proportional to the target’s misdeeds."],["Karmic Shield","Absorbs enemy attacks and reflects proportional energy back."],["Balance Wave","Emits a pulse that buffs allies or debuffs enemies depending on their actions."],["Retributive Bind","Chains enemies’ actions to their past moves, immobilizing repeat offenders."]],
     passives:["Moral Compass — Can sense alignment and intentions of others.","Fate Link — Gains temporary boosts when fighting those who act maliciously.","Karmic Resilience — The more she punishes, the stronger her defenses become."],
@@ -400,7 +418,7 @@ const heroes = {
     stats:{Defense:14,Strength:12,Agility:15,Intelligence:18,Perception:17,"Magic Control":20,"Technique Control":16}
 },
 
-  "Shirleen": {race:"Human", role:"Support", title:"Seer Witch", img:"shirleen.jpg",
+  "Shirleen": {race:"Human", role:"Witch", title:"Seer Witch", img:"shirleen.jpg",
     melee:"Crystal Focus Orb — a floating crystal orb that projects visions and channels time-based magic.",
     abilities:[["Vision of Past","Reveals hidden truths and events that have already occurred."],["Vision of Present","Detects hidden enemies, traps, or ongoing schemes."],["Vision of Future","Predicts enemy moves and environmental hazards a few seconds ahead."],["Arcane Bolt","Basic offensive spell; a quick magical projectile she can cast repeatedly."]],
     passives:["Clairvoyant Insight — Gains enhanced intelligence and perception during combat.","Time Sense — Slightly anticipates attacks, improving evasion.","Foresight Resilience — Magical defenses strengthen proportionally to how well she predicts enemy actions."],
@@ -408,7 +426,7 @@ const heroes = {
     stats:{Defense:12,Strength:10,Agility:16,Intelligence:20,Perception:19,"Magic Control":20,"Technique Control":18}
 },
 
-  "Stanley": {race:"Human", role:"Hybrid", title:"Alchemist", img:"stanley.jpg",
+  "Stanley": {race:"Human", role:"Alchemist", title:"Master Crafter", img:"stanley.jpg",
     melee:"Reinforced Alchemist Rod — can channel potions for explosive or healing effects in close range.",
     abilities:[["Potion Crafting","Quickly brews offensive, defensive, or utility potions mid-battle."],["Elixir Toss","Throws potions that can heal allies or damage enemies."],["Alchemy Infusion","Temporarily enhances weapons or allies using crafted elixirs."],["Basic Elemental Blast","Minor fire, ice, or acid spells for general combat."]],
     passives:["Quick Brew — Potion preparation speed is doubled in combat.","Resourceful Mind — Can improvise potions from available materials.","Chemical Affinity — Gains small buffs when using potions of his own making."],
@@ -416,7 +434,7 @@ const heroes = {
     stats:{Defense:13,Strength:12,Agility:14,Intelligence:19,Perception:16,"Magic Control":18,"Technique Control":17}
 },
 
-  "Starwonder": {race:"Satyr", role:"Support", title:"Dreamweaver", img:"starwonder.jpg",
+  "Starwonder": {race:"Satyr", role:"Mage", title:"Dreamweaver", img:"starwonder.jpg",
     melee:"Stardust Staff — a small, enchanted staff that channels her daydream-based magic.",
     abilities:[["Daydream Projection","Turns imagination into temporary illusions that can distract or trap enemies."],["Whimsical Shield","Creates light, playful barriers from dream energy."],["Somnolent Touch","Puts enemies to sleep briefly with a magical touch or wave."],["Fantasy Burst","Shoots dream energy projectiles with minor damage."]],
     passives:["Imaginative Mind — Spells slightly stronger when thinking creatively.","Dreamer’s Luck — Small chance for random effects to trigger beneficially.","Whimsical Agility — Gains extra evasion in chaotic battlefields."],
@@ -424,7 +442,7 @@ const heroes = {
     stats:{Defense:11,Strength:10,Agility:16,Intelligence:17,Perception:16,"Magic Control":18,"Technique Control":15}
 },
 
-  "Victor": {race:"Human", role:"Hybrid", title:"Toxic Mage", img:"victor.jpg",
+  "Victor": {race:"Human", role:"dps", title:"Toxic Mage", img:"victor.jpg",
     melee:"Poisoned Dagger — coated with magical toxins that can corrode armor or poison enemies.",
     abilities:[["Toxikinesis","Manipulates poisons and toxins, controlling them mid-air or coating weapons."],["Venom Cloud","Creates an area of toxic mist that damages and weakens enemies over time."],["Corrosive Strike","Infuses melee attacks with potent poison."],["Poison Recovery","Can absorb minor toxins to heal or empower himself."]],
     passives:["Poison Resistance — Immune to natural and magical toxins.","Adaptive Toxin — Gains buffs depending on enemy weakness to poison.","Toxic Insight — Can sense poisonous traps or enemies naturally."],
@@ -432,7 +450,7 @@ const heroes = {
     stats:{Defense:15,Strength:17,Agility:15,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":16}
 },
 
-  "Walter": {race:"Dwarf", role:"Hybrid", title:"Earth Bender", img:"walter.jpg",
+  "Walter": {race:"Dwarf", role:"support", title:"Earth Bender", img:"walter.jpg",
     melee:"Stone Hammer — a massive hammer channeling geokinetic energy.",
     abilities:[["Geokinesis","Manipulate earth, stone, and minerals for offense or defense."],["Seismic Slam","Smashes the ground to create shockwaves."],["Stone Armor","Temporarily encases himself in hardened rock."],["Quake Fist","Strikes ground to launch boulders or crush enemies."]],
     passives:["Earth Affinity — Rock and stone-based spells are stronger and more durable.","Stability — Harder to knock down or move.","Miner’s Insight — Can detect hidden minerals or weak points in structures."],
@@ -448,7 +466,7 @@ const heroes = {
     stats:{Defense:12,Strength:14,Agility:17,Intelligence:16,Perception:18,"Magic Control":19,"Technique Control":17}
 },
 
-  "Zena": {race:"Runeborn", role:"Support", title:"Sealing Witch", img:"zena.jpg",
+  "Zena": {race:"Runeborn", role:"Witch", title:"Sealing Witch", img:"zena.jpg",
     melee:"Enchanted Scrolls — can inscribe and release magical seals instantly. Each scroll hums with latent energy, allowing Zena to unleash bindings, traps, or destructive sigils at a moment’s notice.",
     abilities:[["Seal Magic","Draws runic seals that can bind objects, immobilize enemies, or nullify magic. Seals can persist for a set time or until broken."],["Unseal Release","Breaks her own or enemy seals to trigger effects; for example, a broken seal can explode, release stored energy, or weaken foes."],["Runic Trap","Places temporary seals on terrain to restrict movement, slow enemies, or trigger chain effects when stepped on."],["Mana Lock","Creates a sealed zone where enemy spellcasting is limited or nullified."]], 
     passives:["Seal Affinity — Seals last longer, are stronger, and can interact with one another for complex effects.","Quick Sigil — Can inscribe seals in milliseconds, allowing for instant traps or reactionary magic.","Mana Channel — Gains energy when creating or breaking seals, letting her maintain momentum in extended fights.","Runic Insight — Can detect existing seals, traps, or magical bindings in an area, giving her battlefield awareness."],
@@ -462,12 +480,16 @@ const heroes = {
    --------------------------- */
 const roleColor = role => {
   switch(role){
+    case 'Assassin': return getCssVar('--assassin');
     case 'DPS': return getCssVar('--dps');
     case 'Support': return getCssVar('--support');
+    case 'Healer': return getCssVar('--healer');
+    case 'mage': return getCssVar('--mage');
     case 'Tank': return getCssVar('--tank');
-    case 'Hybrid': return getCssVar('--hybrid');
-
-    default: return getCssVar('--hybrid');
+    case 'Witch': return getCssVar('--witch');
+    case 'Hero': return getCssVar('--hero');
+    case 'Alchemist': return getCssVar('--alchemist');
+    default: return getCssVar('--support');
   }
 };
 function getCssVar(name){
@@ -510,7 +532,7 @@ Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
   const article = document.createElement('article');
   article.className = 'card';
   article.dataset.hero = name;
-  article.dataset.role = h.role || 'Hybrid';
+  article.dataset.role = h.role || 'Support';
 
   // set a custom pulse size (subtle variety)
   article.style.setProperty('--pulse-size', `${40 + Math.floor(Math.random()*30)}px`);
