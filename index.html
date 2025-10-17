@@ -174,20 +174,20 @@
    FULL HERO DATA (all characters)
    --------------------------- */
 const heroes = {
-  "Carlos": {race:"Dark Elf", role:"DPS", title:"Shadow Assassin", 
+  "Carlos": {race:"Dark Elf", role:"DPS", title:"Shadow Assassin",
     melee:"Dual Daggers (Shadowfangs) — can phase through matter for sneak attacks.",
-    abilities:[["Umbrakinesis","Manipulate and solidify shadows into weapons or clones. The darker the area, the stronger his strikes."],["Cloaking","Blend with shadows to become invisible briefly; breaks if he is hit by light magic or sound magic."],["Nightstep","Short-range teleport between shadowed spots."]],
-    passives:["Darkness Buff — +25% attack speed & agility at night or dimly lit areas.","Predator’s Focus — The longer he stalks a target without being detected, the higher his critical strike rate grows.."],
-    ultimate:"Event Horizon — Carlos tears open a rift of darkness; creates a miniature black hole that drags in light, sound, and magic.",
+    abilities:[["Umbrakinesis","Manipulate and solidify shadows into weapons or clones. The darker the area, the stronger his strikes."],["Cloaking","Blend with shadows to become invisible briefly; breaks if he attacks or is hit by light or sound magic."],["Nightstep","Short-range teleport between shadowed spots. Can chain if stamina allows."]],
+    passives:["Darkness Buff — +25% attack speed & agility at night or in dimly lit areas.","Predator’s Focus — The longer he stalks a target without being detected, the higher his critical strike rate grows."],
+    ultimate:"Event Horizon — Carlos tears open a swirling rift of pure darkness, creating a miniature black hole born from his own energy. Light, sound, and magic are dragged inward. The ground distorts, weapons crumble, and projectiles vanish into the void. Inside the pull zone, Carlos moves freely, empowered by the collapse; every strike releases waves of compressed dark energy. When he closes his grimoire, the singularity implodes silently, unleashing a shockwave that erases anything too close.",
     stats:{Strength:11,Agility:19,Defense:9,Intelligence:18,Perception:19,"Magic Power":17,"Technique Control":20}
   },
 
-  "Catherine": {race:"Seraph-Blessed Human", role:"Support", title:"Aquamancer Cleric", 
-    melee:"Sacred Grimoire – “Canticle of Tides” — floating hymnbook that amplifies voice-based spells.",
-    abilities:[["Sound Magic – Harmonic Resonance","Melodies heal allies or shatter enemies' focus."],["Hydrokinesis","Manipulates water into healing waves, barriers, or whips."],["Luminous Baptism","Radiant water wave that cleanses debuffs and deals holy splash damage."]],
+  "Catherine": {race:"Seraph-Blessed Human", role:"Support", title:"Aquamancer Cleric",
+    melee:"Sacred Grimoire – “Canticle of Tides” — floating hymnbook that amplifies voice-based spells. Pages shimmer with holy runes and ripple like water when opened.",
+    abilities:[["Sound Magic – Harmonic Resonance","Uses melodies to heal allies or shatter enemies’ focus. The tone determines the effect — soothing for healing, high-pitched for disruption."],["Hydrokinesis","Manipulates water into healing waves, barriers, or whips. Holy-infused water purifies curses and burns shadow creatures."],["Luminous Baptism","Mid-level spell that releases a wave of radiant water, cleansing debuffs and dealing holy splash damage to enemies."]],
     passives:["Praise Buff — Allies near Catherine gain minor HP regen and boosted morale when she sings or chants.","Blessed Flow — Healing abilities scale with her current mana flow, giving her more potent heals when her own HP is high.","Congregation Aura — The more allies within her radius, the stronger her healing and sound amplification become."],
     ultimate:"Divine Choir: Sancta Unda — Catherine summons a grand cathedral made of liquid light and sound waves. Every ally inside gains rapid healing and purified mana, while enemies are deafened and slowly dissolved by holy currents. The more people chant with her, the stronger it becomes.",
-    stats:{Strength:10,Agility:12,Defense:13,Intelligence:19,Perception:17,"Magic Power":20,"Technique Control":18}
+    stats:{Strength:10,Agility:14,Defense:13,Intelligence:19,Perception:17,"Magic Power":20,"Technique Control":18}
   },
 
   "Cherise": {race:"Elf Hybrid", role:"Hybrid", title:"Arcane Artiste", 
