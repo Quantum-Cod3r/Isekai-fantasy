@@ -190,101 +190,109 @@ const heroes = {
     stats:{Strength:10,Agility:14,Defense:13,Intelligence:19,Perception:17,"Magic Power":20,"Technique Control":18}
   },
 
-  "Cherise": {race:"Elf Hybrid", role:"Hybrid", title:"Arcane Artiste", 
-    melee:"Enchanted Paintbrush & Palette — conjures weapons, barriers, or animate creations with every stroke.",
-    abilities:[["Art Magic","Turns colours and brushstrokes into magical effects / constructs."],["Living Canvas","Summons animated creations from paintings to fight or defend."],["Prismatic Veil","Bends colour to create illusions or hide allies."],["Creative Distortion","Warps small areas of reality using paint-magic."]],
-    passives:["Inspire — boosts allies' morale, attack & magic output.","Passion — Her magical output grows stronger when emotionally charged or excited.","Spirit Palette — Residual energy empowers her creation, making them stronger the longer they can stay active."],
-    ultimate:"Masterpiece Cataclysm — Cherise paints the battlefield into a surreal magical landscape. Enemies trapped in her world are slowed, confused, and take continuous magical damage, while allies gain shields, buffs, and can use the terrain creatively.",
-    stats:{Defense:14,Strength:12,Agility:16,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
-  },
+  "Cherise": {race: "Elf Hybrid", role: "Hybrid", title: "Arcane Artiste",
+    melee: "Enchanted Paintbrush & Palette — conjures weapons, barriers, or animate creations with every stroke.",
+    abilities: [["Art Magic","Turns colours and brushstrokes into magical effects / constructs."],["Living Canvas","Summons animated creations from paintings to fight or defend."],["Prismatic Veil","Bends colour to create illusions or hide allies."],["Creative Distortion","Warps small areas of reality using paint-magic."],["Chromatic Surge","Unleashes a burst of radiant colour energy, dealing AOE damage and stunning enemies briefly."]],
+    passives: ["Inspire — boosts allies' morale, attack & magic output.","Passion — Her magical output grows stronger when emotionally charged or excited.","Spirit Palette — Residual energy empowers her creations, making them stronger the longer they stay active.","Muse’s Glow — Reveals hidden or invisible enemies affected by her magic."],
+    stats: {Defense:14,Strength:12,Agility:16,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18},
+    ultimate: "Masterpiece Cataclysm — Cherise paints the battlefield into a surreal magical landscape. Enemies trapped in her world are slowed, confused, and take continuous magical damage, while allies gain shields, buffs, and can use the terrain creatively."
+},
 
-  "David": {race:"Sylph-Tuned Human", role:"DPS", title:"Gale Swordsman", 
-    melee:"Twin Windblades — Zephyr & Tempest; Lightweight, curved swords that hum with compressed air. When swung, they cut by pressure rather than metal.",
-    abilities:[["Speedsetter","Temporarily accelerates his perception and movement so time appears slower to him. Costs heavy stamina and mana."],["Aero Slash","Sends vacuum blades or air bursts with every swing."],["Wind Step","Uses air currents to dash mid-air or change direction instantly."],["Cyclone Guard","Spins blades fast enough to form a mini-tornado shield that deflects projectiles."]],
-    passives:["Acceleration — The longer David moves continuously, the faster he becomes. Stopping resets his speed multiplier.","Momentum Flow — Each successful hit slightly boosts his next strike’s power and accuracy.","Wind’s Grace — Wind magic automatically cushions falls and reduces damage from physical impact.."],
-    ultimate:"Eye of the Tempest — David becomes the calm center of a massive spiral storm. Inside the domain, his speed doubles, and every movement creates slicing wind rings that move independently. Enemies caught inside are buffeted by invisible slashes while he flickers through them faster than sight.",
-    stats:{Strength:13,Agility:20,Defense:12,Intelligence:16,Perception:18,"Magic Power":15,"Technique Control":19}
-  },
+  "David": {race: "Sylph-Tuned Human", role: "DPS", title: "Gale Swordsman",
+    melee: "Twin Windblades — Zephyr & Tempest; lightweight, curved swords that hum with compressed air. When swung, they cut by pressure rather than metal.",
+    abilities: [["Speedsetter","Temporarily accelerates his perception and movement so time appears slower to him. Costs heavy stamina and mana."],["Aero Slash","Sends vacuum blades or air bursts with every swing."],["Wind Step","Uses air currents to dash mid-air or change direction instantly."],["Cyclone Guard","Spins blades fast enough to form a mini-tornado shield that deflects projectiles."]],
+    passives: ["Acceleration — The longer David moves continuously, the faster he becomes. Stopping resets his speed multiplier.","Momentum Flow — Each successful hit slightly boosts his next strike’s power and accuracy.","Wind’s Grace — Wind magic automatically cushions falls and reduces damage from physical impact."],
+    stats: {Strength:13,Agility:20,Defense:12,Intelligence:16,Perception:18,"Magic Power":15,"Technique Control":19},
+    ultimate: "Eye of the Tempest — David becomes the calm center of a massive spiral storm. Inside the domain, his speed doubles, and every movement creates slicing wind rings that move independently. Enemies caught inside are buffeted by invisible slashes while he flickers through them faster than sight."
+},
 
-  "Dominion": {race:"Archon-Born", role:"Hybrid", title:"Dimensional Summoner", img:"dominion.jpg",
-    melee:"Arcane Grimoire — Codex of Realms; channels summoning seals.",
-    abilities:[["Summoning Arts","Calls forth entities from his private realm: elemental beasts, spectral guardians, or constructs of pure energy. Each summon has its own trait (tank, striker, mage, scout, etc.)."],["Pocket Dimension","Opens or manipulates his private dimension for storage, travel, or isolation. He can trap enemies or shelter allies in it temporarily."],["Spatial Shift","Teleports to any marked summon’s position or swaps two entities mid-battle."],["Binding Sigils","Engraves glowing runes that boost his summons’ power or restrain foes within an area."]],
-    passives:["Absolute Control — Dominion maintains total synchronization with his summons, directing several simultaneously without concentration loss.","Dimensional Awareness — Instinctively detects distortions, teleportation traces, or spatial anomalies.","Arcane Resonance — Each active summon strengthens his dimensional stability and boosts all his magic efficiency."],
-    ultimate:"Grand Convergence — Dominion fuses all active summons into a single massive construct — a colossal spirit avatar called “Eidolon Prime.” It mirrors his movements, amplifies his spells, and can fragment back into his original summons on command. Within this form, his control is absolute — every strike, every defense, every inch of space answers to him.",
-    stats:{Strength:10,Agility:12,Defense:16,Intelligence:19,Perception:18,"Magic Power":20,"Technique Control":19}
-  },
+  "Dominion": {race: "Archon-Born", role: "Hybrid", title: "Dimensional Summoner", img: "dominion.jpg",
+    melee: "Arcane Grimoire — Codex of Realms; channels summoning seals.",
+    abilities: [["Summoning Arts","Calls forth entities from his private realm: elemental beasts, spectral guardians, or constructs of pure energy. Each summon has its own trait (tank, striker, mage, scout, etc.)."],["Pocket Dimension","Opens or manipulates his private dimension for storage, travel, or isolation. He can trap enemies or shelter allies in it temporarily."],["Spatial Shift","Teleports to any marked summon’s position or swaps two entities mid-battle."],["Binding Sigils","Engraves glowing runes that boost his summons’ power or restrain foes within an area."]],
+    passives: ["Absolute Control — Dominion maintains total synchronization with his summons, directing several simultaneously without concentration loss.","Dimensional Awareness — Instinctively detects distortions, teleportation traces, or spatial anomalies.","Arcane Resonance — Each active summon strengthens his dimensional stability and boosts all his magic efficiency."],
+    stats: {Strength:10,Agility:12,Defense:16,Intelligence:19,Perception:18,"Magic Power":20,"Technique Control":19},
+    ultimate: "Grand Convergence — Dominion fuses all active summons into a single massive construct — a colossal spirit avatar called “Eidolon Prime.” It mirrors his movements, amplifies his spells, and can fragment back into his original summons on command. Within this form, his control is absolute — every strike, every defense, every inch of space answers to him."
+},
 
-  "Ethan": {race:"Half-Dragon", role:"DPS", title:"Infernal Vanguard", img:"ethan.jpg",
-    melee:"Scorched Chain Hook — a fiery hybrid of whip and blade, channels both brute force and fire magic.",
-    abilities:[["Pyrokinesis","Control over fire’s temperature, color, and form—turns sparks into infernos or shapes into weapons."],["Phoenix Recovery","Revives from the brink once per battle, flames restoring wounds."],["Infernal Surge","Boosts power, speed, and senses when engulfed in flames."],["Draconic Roar","Emits a pressure wave of molten heat that cracks armor and shakes the ground."]],
-    passives:["Pyro Affinity — fire spells less costly & stronger.","Fire Resistance — immune to flames and high temperature environments.","Molten Heart — Sustained combat increases power output over time (he gets stronger the longer he fights 🔥)."],
-    ultimate:"Cataclysm Drive — Ethan releases the sealed dragon core in his chest, becoming a flaming comet that obliterates enemies in a fiery explosion before re-forming from molten ash.",
-    stats:{Defense:16,Strength:16,Agility:16,Intelligence:16,Perception:16,"Magic Control":16,"Technique Control":16}
-  },
+  "Ethan": {race: "Half-Dragon", role: "DPS", title: "Infernal Vanguard", img: "ethan.jpg",
+    melee: "Scorched Chain Hook — a fiery hybrid of whip and blade, channels both brute force and fire magic.",
+    abilities: [["Pyrokinesis","Control over fire’s temperature, color, and form—turns sparks into infernos or shapes into weapons."],["Phoenix Recovery","Revives from the brink once per battle, flames restoring wounds."],["Infernal Surge","Boosts power, speed, and senses when engulfed in flames."],["Draconic Roar","Emits a pressure wave of molten heat that cracks armor and shakes the ground."]],
+    passives: ["Pyro Affinity — fire spells less costly & stronger.","Fire Resistance — immune to flames and high temperature environments.","Molten Heart — sustained combat increases power output over time (he gets stronger the longer he fights)."],
+    stats: {Defense:16,Strength:16,Agility:16,Intelligence:16,Perception:16,"Magic Control":16,"Technique Control":16},
+    ultimate: "Cataclysm Drive — Ethan releases the sealed dragon core in his chest, becoming a flaming comet that obliterates enemies in a fiery explosion before re-forming from molten ash."
+},
 
-  "Gift": {race:"Human (Cursed Lineage)", role:"Hybrid", title:"Witch", 
-    melee:"Grimoire-Wand Hybrid — amplifies her spells through floating crimson sigils and channelled curses.",
-    abilities:[["Hemocraft","Converts her blood into mana to amplify magic or heal allies at the cost of her own vitality."],["Scarlet Bind","Conjures chains of solidified blood energy that immobilize and drain enemies."],["Witchfire Bloom","Erupts a field of crimson flames that consume magic energy, weakening spellcasters."],["Sanguine Mirage","Creates illusions from blood mist that echo her attacks for a few seconds, confusing opponents."]],
-    passives:["Crimson Catalyst — Spells grow stronger the more blood she expends.","Witch’s Insight — Enhances magical perception, allowing her to read and anticipate enemy spell formations."],
-    ultimate:"Ritual of the Red Moon — Gift inscribes a massive sigil beneath her as the moon above turns crimson. Enemies caught inside are lifted into the air, their energy drained to empower her allies’ spells while blood rain pours from the sky.",
-    stats:{Defense:13,Strength:10,Agility:14,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":18}
-  },
 
-  "Gianna": {race:"Beastman (Feline Type)", role:"DPS", title:"Tech Predator", 
+ "Gift": {race: "Human (Cursed Lineage)", role: "Hybrid", title: "Witch", img: "gift.jpg",
+    melee: "Grimoire-Wand Hybrid — amplifies her spells through floating crimson sigils and channelled curses.",
+    abilities: [["Hemocraft","Converts her blood into mana to amplify magic or heal allies at the cost of her own vitality."],["Scarlet Bind","Conjures chains of solidified blood energy that immobilize and drain enemies."],["Witchfire Bloom","Erupts a field of crimson flames that consume magic energy, weakening spellcasters."],["Sanguine Mirage","Creates illusions from blood mist that echo her attacks for a few seconds, confusing opponents."]],
+    passives: ["Crimson Catalyst — spells grow stronger the more blood she expends.","Witch’s Insight — enhances magical perception, allowing her to read and anticipate enemy spell formations."],
+    stats: {Defense:13,Strength:10,Agility:14,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":18},
+    ultimate: "Ritual of the Red Moon — Gift inscribes a massive sigil beneath her as the moon above turns crimson. Enemies caught inside are lifted into the air, their energy drained to empower her allies’ spells while blood rain pours from the sky."
+},
+
+
+  "Gianna": {race:"Beastman (Feline Type)", role:"DPS", title:"Tech Predator",
     melee:"Enhanced Claw Gauntlets — reinforced with mana circuits, sparking with stored energy during slashes.",
     abilities:[["Animal Instinct","Heightened senses and reaction time; can sense danger or ambushes before they happen."],["Savage Blitz","Rapid claw combo infused with static mana that tears through armor and disrupts mana flow."],["Overdrive Rush","Channels raw adrenaline and electricity to boost all physical stats for a short time."],["Hunter’s Pounce","Leaps at enemies with crushing force, stunning and shocking them on impact."]],
-    passives:["Savage Core – The lower her HP, the stronger and faster she becomes.","Techblood – Instinctively fuses mana with machinery, repairing and upgrading gear mid-battle without thinking.","Beast Reflexes – Reacts to threats with superhuman speed, dodging or countering attacks almost instinctively."],
-    ultimate:"Predator Protocol — beast form & tech merge; lightning claws & storm movement for 30s.",
-    stats:{Defense:15,Strength:17,Agility:18,Intelligence:16,Perception:17,"Magic Control":15,"Technique Control":16}
-  },
+    passives:["Savage Core — The lower her HP, the stronger and faster she becomes.","Techblood — Instinctively fuses mana with machinery, repairing and upgrading gear mid-battle without thinking.","Beast Reflexes — Reacts to threats with superhuman speed, dodging or countering attacks almost instinctively."],
+    stats:{Defense:15,Strength:17,Agility:18,Intelligence:16,Perception:17,"Magic Control":15,"Technique Control":16},
+    ultimate:"Predator Protocol — beast form and tech merge; lightning claws and storm-speed movement for 30s."
+},
 
-  "Gregory": {race:"Celestial (Half-Angel)", role:"Tank", title:"Divine Hero", img:"gregory.jpg",
-    melee:"Lumisblade — radiant sword forged from condensed light.",
-    abilities:[["Superhuman Physique","Enhanced strength & endurance."],["Divine Spellcasting","Light-based magic for healing & shields."],["Aegis of Virtue","Golden barrier reflecting projectiles."],["Heaven’s Descent","Angel wings for flight and divine speed."]],
-    passives:["Hero’s Resolve","Divine Presence"],
-    ultimate:"Judgment Ascension — summons pillar of celestial light raining holy blasts and restoring allies.",
-    stats:{Defense:17,Strength:17,Agility:15,Intelligence:16,Perception:18,"Magic Control":17,"Technique Control":16}
-  },
 
-  "Ian": {race:"Munchkin", role:"Tank", title:"Titanbreaker", img:"ian.jpg",
-    melee:"The Bonkhammer — comically oversized warhammer channeling kinetic power.",
-    abilities:[["Gigaton Smash","Consecutive hammer strikes multiply in strength."],["Earthbound Tremor","Localized quakes from ground slams."],["Kinetic Absorption","Converts physical damage into strength."],["Boulder Toss","Throws massive objects effortlessly."]],
-    passives:["Mini Might — smaller HP increases strike power.","Unyielding Spirit — cannot be stunned/knocked down."],
-    ultimate:"Mountain’s Wrath — grows giant and unleashes a colossal blow reshaping the battlefield.",
-    stats:{Defense:18,Strength:20,Agility:11,Intelligence:13,Perception:14,"Magic Control":10,"Technique Control":12}
-  },
+ "Gregory": {race:"Celestial (Half-Angel)", role:"Tank", title:"Divine Hero",
+    melee:"Lumisblade — a radiant sword forged from condensed light, capable of cutting through darkness and purifying corruption.",
+    passives:["Hero’s Resolve — Damage increases when protecting allies or standing against evil.","Divine Presence — Naturally boosts allies’ morale and weakens nearby enemies through sheer aura."],
+    stats:{Defense:17,Strength:17,Agility:15,Intelligence:16,Perception:18,"Magic Control":17,"Technique Control":16},
+    ultimate:"Judgment Ascension — Gregory rises skyward, summoning a pillar of celestial light that rains down holy blasts across the battlefield, obliterating evil and restoring allies caught in the glow."
+},
 
-  "Ivy": {race:"Sylvan Elf", role:"Support", title:"Verdant Sentinel", img:"ivy.jpg",
-    melee:"Bloomfang Blade — living sword that grows vines & thorns mid-swing.",
-    abilities:[["Verdant Dominion","Manipulates plants to entangle, heal, or attack."],["Floral Genesis","Instantly grows protective flora & traps."],["Beast Whisper","Commands natural creatures."],["Thorn Requiem","Vines track enemies via mana scent."]],
-    passives:["Mother Nature’s Blessing","Harmony of the Wilds"],
-    ultimate:"Eden’s Embrace — merges with forest; vines erupt, flowers heal allies, enemies ensnared.",
-    stats:{Defense:14,Strength:12,Agility:15,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":16}
-  },
 
-  "Jayson": {race:"Human (Cryo-touched)", role:"DPS", title:"Frostblade Ranger", img:"jayson.jpg",
-    melee:"Glacier Shuriken — enchanted self-returning ice blades.",
-    abilities:[["Cryokinesis","Control ice in all forms."],["Cryo Rebirth","Shatter into ice & reform once per battle."],["Frost Mirage","Icy clones explode into freezing mist."],["White Silence","Silences sound to boost focus & crits."]],
-    passives:["Cryo Affinity","Frozen Focus"],
-    ultimate:"Absolute Zero — freezes everything in a wide radius into suspended stillness.",
-    stats:{Defense:14,Strength:13,Agility:19,Intelligence:17,Perception:18,"Magic Control":17,"Technique Control":18}
-  },
+  "Ian": {race:"Munchkin", role:"Tank", title:"Titanbreaker",
+    melee:"The Bonkhammer — comically oversized warhammer channeling raw kinetic energy, causing the ground to ripple with every swing.",
+    abilities:[["Gigaton Smash","Every hammer strike multiplies in power with consecutive hits, generating shockwaves."],["Earthbound Tremor","Slams the ground to create localized quakes that throw enemies off balance."],["Kinetic Absorption","Converts incoming physical damage into strength boosts."],["Boulder Toss","Picks up and throws absurdly large objects with ease."]],
+    passives:["Mini Might — The smaller his HP, the stronger his hits.","Unyielding Spirit — Cannot be stunned or knocked down; his tenacity literally defies physics."],
+    stats:{Defense:18,Strength:20,Agility:11,Intelligence:13,Perception:14,"Magic Control":10,"Technique Control":12},
+    ultimate:"Mountain’s Wrath — Ian channels all stored kinetic energy into his hammer, growing to giant size for a few seconds before unleashing a single colossal blow that reshapes the battlefield."
+},
 
-  "Jeremy": {race:"Human (Peak Condition)", role:"Hybrid", title:"Shadow Operative / Tactician", img:"jeremy.jpg",
-    melee:"Nocturne Arsenal — modular weapon system built from enchanted alloys and ancient tech; transforms between dual tonfas, a collapsible staff, or short blades. The weapon absorbs kinetic energy from impacts, storing it to unleash devastating counterstrikes",
-    abilities:[["Adaptive Combat","Instantly reads enemy patterns and evolves his fighting style mid-battle."],["Tactical Vision","Uses specialized contact lenses that analyze weak points, mana flow, and trajectory paths."],["Stealth Drive","Total silence and invisibility for short bursts using advanced cloaking tech"],["EMP Pulse","Disrupts nearby magic and energy systems, leveling the field against spellcasters."]],
-    passives:["Prep Time Mastery — Gains power scaling with information. The more he knows, the harder he is to beat." ,"Cold Logic — Immune to fear and mental interference; every emotion is filtered through calculation." ,"Kinetic Reflexes — Converts absorbed kinetic energy into enhanced speed and strength for brief periods."],
-    ultimate:"The Apex Protocol — full combat suit & neural enhancements; predicts and counters at superhuman speed.",
-    stats:{Defense:18,Strength:16,Agility:19,Intelligence:20,Perception:20,"Magic Control":0,"Technique Control":20}
-  },
 
-  "Joshua": {race:"Human (Divinely Blessed)", role:"Support", title:"Luminary Priest", img:"joshua.jpg",
-    melee:"Staff of Sanctus — manifests from divine light.",
-    abilities:[["Divine Light","Celestial energy disintegrates corruption."],["Solar Restoration","Channels divine energy into others to heal."],["Judgment Ray","Concentrated beam of holy radiance."],["Blessed Radiance","Aura that weakens dark magic."]],
-    passives:["Child of Light","Faith Unbroken"],
-    ultimate:"Genesis Halo — massive holy halo floods battlefield restoring life and reshaping terrain.",
-    stats:{Defense:16,Strength:12,Agility:13,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18}
-  },
+  "Ivy": {race:"Sylvan Elf", role:"Support", title:"Verdant Sentinel",
+    melee:"Bloomfang Blade — a living sword that grows vines and thorns mid-swing, feeding off Ivy’s mana.",
+    abilities:[["Verdant Dominion","Manipulates plants to entangle, heal, or attack; roots can pierce armor or shield allies."],["Floral Genesis","Grows protective flora instantly — trees, barriers, or blooming traps that explode with pollen bursts."],["Beast Whisper","Commands nearby natural creatures or summons forest spirits for aid."],["Thorn Requiem","Launches razor-sharp vines that track enemies’ movement through mana scent."]],
+    passives:["Mother Nature’s Blessing — Gradually regenerates HP and mana while standing on natural terrain.","Harmony of the Wilds — Gains stat boosts when fighting alongside summoned creatures or other nature mages."],
+    stats:{Defense:14,Strength:12,Agility:15,Intelligence:18,Perception:17,"Magic Control":19,"Technique Control":16},
+    ultimate:"Eden’s Embrace — Ivy merges with the forest, transforming the battlefield into a massive living garden. Vines erupt, flowers heal allies, and enemies are ensnared in thorned prisons that drain their life force into Ivy’s magic core."
+},
+
+
+  "Jayson": {race:"Human (Cryo-touched)", role:"DPS", title:"Frostblade Ranger",
+    melee:"Glacier Shuriken — enchanted, self-returning ice-forged blades that freeze targets on contact.",
+    abilities:[["Cryokinesis","Controls ice in all forms — shards, mist, and frost barriers; can freeze moisture midair into weapons."],["Cryo Rebirth","When near death, his body shatters into ice and reforms elsewhere, healing partway (once per battle)."],["Frost Mirage","Creates icy clones that mirror his movements and explode into freezing mist when struck."],["White Silence","Silences all sound within a radius, boosting focus, stealth, and critical accuracy."]],
+    passives:["Cryo Affinity — All ice magic consumes 30% less energy and deals amplified damage in cold environments.","Frozen Focus — The calmer his heart rate, the higher his precision and spell control."],
+    stats:{Defense:14,Strength:13,Agility:19,Intelligence:17,Perception:18,"Magic Control":17,"Technique Control":18},
+    ultimate:"Absolute Zero — Jayson unleashes total cryo dominion, freezing everything within a wide radius to absolute stillness. Enemies caught inside are trapped in suspended time for a few seconds as he moves freely to strike."
+},
+
+
+  "Jeremy": {race:"Human (Peak Condition)", role:"Hybrid", title:"Shadow Tactician",
+    melee:"Nocturne Arsenal — an adaptive modular weapon forged from enchanted alloys and forgotten tech. It seamlessly shifts between dual tonfas, a collapsible staff, or short blades. Each strike feeds kinetic energy into its core, storing power to unleash counterattacks with surgical, bone-rattling precision.",
+    abilities:[["Adaptive Combat","Effortlessly deciphers enemy fighting patterns in real time, reshaping his style to match and overwhelm. Every move against him is another line in a book he’s already reading ahead of you."],["Tactical Vision","Custom combat lenses scan weak points, mana flow, and trajectory paths with microscopic accuracy, turning every blink into a battle calculation."],["Stealth Drive","Pure science, zero magic. He slips into utter silence and optical invisibility, striking before you even realize the lights dimmed."], ["EMP Pulse","Releases a condensed energy burst that fries mana circuits and nullifies magic-based systems in the area, dragging mages down to his playing field."]],
+    passives:["Prep Time Mastery — The more information he gathers, the deadlier he becomes. Knowledge isn’t just power, it’s a loaded weapon in his hands.","Cold Logic — Fear? Panic? Irrational impulse? Deleted. Every thought is filtered through tactical computation.","Kinetic Reflexes — Converts absorbed kinetic force into bursts of inhuman speed and strength, turning your own hits into your worst mistake."],
+    stats:{Defense:18,Strength:16,Agility:19,Intelligence:20,Perception:20,"Magic Control":0,"Technique Control":20},
+    ultimate:"The Apex Protocol — Jeremy triggers his full combat suite: neural enhancements, tactical overlays, and predictive combat algorithms. For 90 seconds, he operates beyond human reaction speed, calculating and countering every strike before it’s made. To him, the fight is already over."
+},
+
+
+ "Joshua": {race:"Human (Divinely Blessed)", role:"Support", title:"Luminary Priest",
+    melee:"Staff of Sanctus — manifests from divine light, glowing brighter the purer his intent.",
+    abilities:[["Divine Light","Celestial energy disintegrates corruption and curses."],["Solar Restoration","Channels divine energy into others to heal and purify."],["Judgment Ray","Calls down a concentrated beam of holy radiance."],["Blessed Radiance","Aura that weakens dark magic and strengthens allies."]],
+    passives:["Child of Light — Divine energy constantly regenerates him, no matter the wound.","Faith Unbroken — Immune to corruption, fear, and possession; light only shines brighter in darkness."],
+    stats:{Defense:16,Strength:12,Agility:13,Intelligence:19,Perception:18,"Magic Control":20,"Technique Control":18},
+    ultimate:"Genesis Halo — Joshua becomes a conduit of divine will, flooding the battlefield with sanctified light that heals allies, weakens enemies, and reshapes the terrain into holy ground."
+},
+
 
   "Kiptoo": {race:"Dwarf", role:"Tank", title:"Steam Engineer / Inventor", img:"kiptoo.jpg",
     melee:"Reinforced Gauntlets — punch, shock, deploy gadgets.",
