@@ -153,8 +153,54 @@
   .muted{color:var(--muted)}
   .stat-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
   .stat{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:8px;min-width:86px;text-align:center;color:var(--muted)}
-  .ability{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;margin-bottom:8px}
-  .ultimate{margin-top:12px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+  .ability{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;margin-bottom:8px;border-left:2px solid var(--accent);border-radius:8px;border-right:2px solid var(--accent);}
+  .passive{background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;margin-bottom:8px;border-left:2px solid var(--acce  nt)}
+  .ultimate{
+    margin-top:12px;
+    padding:16px;
+    border-radius:8px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    position:relative;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 0 20px rgba(139, 224, 255, 0.1);
+    overflow:hidden;
+    border-radius:8px;border-left:2px solid var(--accent);
+    border-radius:8px;border-right:2px solid var(--accent);
+    border-radius:8px;border-bottom:2px solid var(--accent);
+    border-radius:8px;border-top:2px solid var(--accent);
+  }
+  .ultimate::before {
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:linear-gradient(45deg, transparent 65%, rgba(139, 224, 255, 0.1) 75%, transparent 85%);
+    background-size:200% 200%;
+    animation:ultimateShine 3s infinite;
+    pointer-events:none;
+  }
+  .ultimate::after {
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="90" x2="90" y2="10" stroke="white" stroke-width="0.5" stroke-opacity="0.1"/></svg>') 0 0/20px 20px;
+    opacity:0.5;
+    animation:ultimateEnergy 10s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes ultimateShine {
+    0%, 100% { background-position:200% 0; }
+    50% { background-position:0 0; }
+  }
+  @keyframes ultimateEnergy {
+    from { transform:translateX(-20px); }
+    to { transform:translateX(0); }
+  }
   .close-btn{display:inline-block;margin-top:12px;background:linear-gradient(90deg,#7dd3fc,#c07bff);color:#021024;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer}
   @media (max-width:880px){.sheet-img{width:220px;height:220px;flex:0 0 220px}.card{height:300px}.portrait{height:180px}}
 </style>
@@ -307,7 +353,7 @@ const heroes = {
 
   "Jeremy": {"race": "Human (Peak Condition)","role": "dps","title": "Shadow Operative",
     melee: "Nocturne Arsenal — an adaptive modular weapon forged from enchanted alloys and forgotten tech. It seamlessly shifts between dual tonfas, a collapsible staff, or short blades. Each strike feeds kinetic energy into its core, storing power to unleash counterattacks with surgical, bone-rattling precision.",
-    abilities: [["Adaptive Combat","Effortlessly deciphers enemy fighting patterns in real time, reshaping his style to match and overwhelm. Every move against him is another line in a book he’s already reading ahead of you. The more data he collects, the faster and more unpredictable his counters become, forcing enemies into a spiral of predictable failure as he turns their strengths into glaring weaknesses."]["Tactical Vision","Custom combat lenses scan weak points, mana flow, and trajectory paths with microscopic accuracy, turning every blink into a battle calculation. His lenses don’t just see — they project environmental simulations, predict opponent movement arcs, and highlight structural vulnerabilities in real time. He can collapse terrain, anticipate spells before they’re cast, and strike at the perfect moment with surgical precision."],["Stealth Drive","Pure science, zero magic. He slips into utter silence and optical invisibility, striking before you even realize the lights dimmed. His stealth system bends both light and sound, generating an adaptive cloaking field that evolves with every encounter. Even magical detection systems are fed false readings. By the time a target senses something is off, he’s already repositioned for the kill."],["EMP Pulse","Releases a condensed energy burst that fries mana circuits and nullifies magic-based systems in the area, dragging mages down to his playing field. The pulse intelligently adapts mid-burst, locking onto the strongest mana signatures and stripping them layer by layer, unraveling active spells mid-cast and destabilizing magical constructs. Enchanted weapons flicker and die, magical shields collapse, and the battlefield tilts violently in his favor."],["Rift Stride","A controlled burst of kinetic displacement lets him appear and disappear in short-range jumps. It’s not teleportation — it’s weaponized momentum. His body syncs with his combat suit’s inertial dampeners, letting him shift position faster than the eye can track. He uses it to break line of sight, ambush, and reposition with predatory precision, turning any battlefield into a chessboard where he’s always ten moves ahead."],["Combat Echo","Every successful dodge or counter stores a phantom afterimage that replicates the move a second later, turning solo fights into a one-man beatdown. These echoes act with perfect timing, following the trajectory of his original movements but adjusting to the enemy’s altered stance, creating pressure from multiple angles without draining his stamina. It’s like fighting an opponent and their flawless shadow at once."]],
+    abilities: [["Adaptive Combat","Effortlessly deciphers enemy fighting patterns in real time, reshaping his style to match and overwhelm. Every move against him is another line in a book he’s already reading ahead of you. The more data he collects, the faster and more unpredictable his counters become, forcing enemies into a spiral of predictable failure as he turns their strengths into glaring weaknesses."],["Tactical Vision","Custom combat lenses scan weak points, mana flow, and trajectory paths with microscopic accuracy, turning every blink into a battle calculation. His lenses don’t just see — they project environmental simulations, predict opponent movement arcs, and highlight structural vulnerabilities in real time. He can collapse terrain, anticipate spells before they’re cast, and strike at the perfect moment with surgical precision."],["Stealth Drive","Pure science, zero magic. He slips into utter silence and optical invisibility, striking before you even realize the lights dimmed. His stealth system bends both light and sound, generating an adaptive cloaking field that evolves with every encounter. Even magical detection systems are fed false readings. By the time a target senses something is off, he’s already repositioned for the kill."],["EMP Pulse","Releases a condensed energy burst that fries mana circuits and nullifies magic-based systems in the area, dragging mages down to his playing field. The pulse intelligently adapts mid-burst, locking onto the strongest mana signatures and stripping them layer by layer, unraveling active spells mid-cast and destabilizing magical constructs. Enchanted weapons flicker and die, magical shields collapse, and the battlefield tilts violently in his favor."],["Rift Stride","A controlled burst of kinetic displacement lets him appear and disappear in short-range jumps. It’s not teleportation — it’s weaponized momentum. His body syncs with his combat suit’s inertial dampeners, letting him shift position faster than the eye can track. He uses it to break line of sight, ambush, and reposition with predatory precision, turning any battlefield into a chessboard where he’s always ten moves ahead."],["Combat Echo","Every successful dodge or counter stores a phantom afterimage that replicates the move a second later, turning solo fights into a one-man beatdown. These echoes act with perfect timing, following the trajectory of his original movements but adjusting to the enemy’s altered stance, creating pressure from multiple angles without draining his stamina. It’s like fighting an opponent and their flawless shadow at once."]],
     passives: ["Prep Time Mastery — The more information he gathers, the deadlier he becomes. Knowledge isn’t just power, it’s a loaded weapon in his hands. He builds entire counter-strategies from scraps of movement, adapting his entire combat flow in seconds. Give him time to analyze, and the battle is over before it begins.","Cold Logic — Fear? Panic? Irrational impulse? Deleted. Every thought is filtered through tactical computation. He processes the battlefield like a living algorithm, cutting away emotion, distraction, and hesitation. Every move is the most efficient possible response to the situation.","Kinetic Reflexes — Converts absorbed kinetic force into bursts of inhuman speed and strength, turning your own hits into your worst mistake. The more impact he endures, the more explosive his retaliation becomes. A solid hit doesn’t weaken him — it supercharges him.","Neural Assimilation — Every opponent’s combat style is stored, analyzed, and integrated. Once he’s fought you once, a rematch is basically him playing back your greatest hits… only better. His neural processors map your habits, timing, and micro-movements, letting him replicate and counter you simultaneously. Your tricks won’t work twice. They won’t even work once if he’s watching closely enough."],
     stats: {"Defense": 18,"Strength": 17,"Agility": 19,"Intelligence": 20,"Perception": 20,"Magic Control": 0,"Technique Control": 20 },
     ultimate: "The Apex Protocol — Jeremy triggers his full combat suite: neural enhancements, tactical overlays, and predictive combat algorithms. For 90 seconds, he operates beyond human reaction speed, calculating and countering every strike before it’s made. His entire nervous system syncs with a hyper-threaded combat AI that processes the battlefield faster than any human eye can perceive. Every heartbeat becomes a calculation, every breath a blade. Spells unravel before they’re cast. Bullets curve around him like they’ve lost their way. To him, the fight isn’t happening — it already happened, and he won. Anyone standing against him in those 90 seconds is simply replaying a losing battle."
@@ -579,8 +625,25 @@ grid.addEventListener('click', (e)=>{
   if(!h) return;
 
   // build abilities html (compact)
-  const abilitiesHtml = (h.abilities || []).map(a => `<div class="ability"><strong>${escapeHtml(a[0])}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(a[1])}</div></div>`).join('');
-  const passivesHtml = (h.passives || []).map(p=>`<li>${escapeHtml(p)}</li>`).join('');
+  let abilitiesHtml = '';
+  if (Array.isArray(h.abilities)) {
+    abilitiesHtml = h.abilities.map(a => `<div class="ability"><strong>${escapeHtml(a[0])}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(a[1])}</div></div>`).join('');
+  } else if (typeof h.abilities === 'string') {
+    // Handle string format (like Mario's abilities)
+    abilitiesHtml = h.abilities.split(';').map(ability => {
+      const [name, desc] = ability.split('—').map(s => s.trim());
+      return `<div class="ability"><strong>${escapeHtml(name)}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(desc || '')}</div></div>`;
+    }).join('');
+  }
+  let passivesHtml = '';
+  if (Array.isArray(h.passives)) {
+    passivesHtml = h.passives.map(p => `<div class="passive">${escapeHtml(p)}</div>`).join('');
+  } else if (typeof h.passives === 'string') {
+    // Handle string format (like Mario's passives)
+    passivesHtml = h.passives.split(';').map(passive => 
+      `<div class="passive">${escapeHtml(passive.trim())}</div>`
+    ).join('');
+  }
   const statsHtml = Object.entries(h.stats || {}).map(([k,v])=>`<div class="stat"><b>${v}</b><div style="font-size:11px;color:var(--muted)">${escapeHtml(k)}</div></div>`).join('');
 
   sheet.innerHTML = `
@@ -596,7 +659,7 @@ grid.addEventListener('click', (e)=>{
     </div>
     <div class="abilities"><h3 style="margin:8px 0 8px;color:var(--accent)">Abilities</h3>${abilitiesHtml}</div>
     <div class="ultimate"><h3 style="margin:8px 0 6px;color:var(--accent)">Ultimate</h3><p style="margin:0;color:var(--muted)">${escapeHtml(h.ultimate || '')}</p></div>
-    <div style="margin-top:12px" class="passives"><h3 style="margin:8px 0 6px;color:var(--accent)">Passives</h3><ul>${passivesHtml}</ul></div>
+    <div style="margin-top:12px" class="passives"><h3 style="margin:8px 0 12px;color:var(--accent)">Passives</h3>${passivesHtml}</div>
     <div style="display:flex;justify-content:flex-end"><div class="close-btn" id="closeBtn">Close</div></div>
   `;
   overlay.classList.add('show');
