@@ -69,6 +69,13 @@
     gap:18px;
     width:100%;
   }
+  
+.styled-text {
+    font-family: Arial;
+    font-weight: bold;
+    text-align: right;
+    font-style: italic;
+  }
 
   .card{
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
@@ -187,6 +194,8 @@
   <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="sheet" id="sheet"></div>
   </div>
+  
+  
 
 <script>
 /* ---------------------------
@@ -606,5 +615,6 @@ function escapeHtml(s){ if(typeof s!=='string') return s; return s.replaceAll('&
 function escapeJs(s){ return String(s).replaceAll("'", "\\'").replaceAll('"','\\"'); }
 
 </script>
+ <p class="styled-text"> By Jeremy Muhia, You're class is coding wizard. </p>
 </body>
 </html>
