@@ -194,6 +194,12 @@
     to { transform:translateX(0); }
   }
   .close-btn{display:inline-block;margin-top:12px;background:linear-gradient(90deg,#7dd3fc,#c07bff);color:#021024;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer}
+  
+  /* Role filter tabs */
+  .role-filters{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .role-tab{padding:8px 18px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);cursor:pointer;transition:all .2s ease;border:1px solid rgba(255,255,255,0.05);font-weight:700;font-size:14px}
+  .role-tab:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)}
+  .role-tab.active{background:linear-gradient(90deg,#7dd3fc,#c07bff);color:#021024;border-color:transparent}
   @media (max-width:880px){.sheet-img{width:220px;height:220px;flex:0 0 220px}.card{height:300px}.portrait{height:180px}}
 </style>
 </head>
@@ -209,18 +215,12 @@
   </header>
 
   <main>
-    <div class="legend" aria-hidden="true">
-      <div class="chip"><span class="swatch" style="background:var(--shadow_stalker)"></span> Shadowstalker</div>
-      <div class="chip"><span class="swatch" style="background:var(--reaver)"></span> Reaver</div>
-      <div class="chip"><span class="swatch" style="background:var(--luminara)"></span> Luminara</div>
-      <div class="chip"><span class="swatch" style="background:var(--aetherist)"></span> Aetherist</div>
-      <div class="chip"><span class="swatch" style="background:var(--tank)"></span> Tank</div>
-    </div>
-
     <section class="intro">
       <h2 style="margin:0">Pick a legend</h2>
-      <p>Alphabetized, color-coded, and glowing — click any card to open details.</p>
+      <p>Filter by role and explore your favorite classmates.</p>
     </section>
+
+    <div class="role-filters" id="roleFilters"></div>
 
     <section class="grid" id="heroesGrid"></section>
   </main>
@@ -392,7 +392,7 @@ const heroes = {
     ultimate:"Genesis Halo — Joshua becomes a conduit of divine will. A massive halo forms in the sky, flooding the battlefield with sanctified light that blinds evil, restores life, and reshapes the ground into holy soil. For one minute, he is the Light itself — untouchable, unstoppable, and absolute."
 },
 
-  "Joy Shannelle": {race: "Reptilian-Hybrid", role: "ShadowStalker", title: "Silver Tongue",
+  "Joy Shannelle": {race: "Reptilian-Hybrid", role: "Shadowstalker", title: "Silver Tongue",
     melee: "Venomless Fang — lashes or coils with precise strikes, restraining enemies without poison.",
     abilities: [["Mind Whisper", "Subtly influences thoughts, causing hesitation or doubt in enemies."],["Serpentine Agility", "Slithers or contorts to dodge attacks or squeeze through gaps."],["Coiling Strike", "Strikes multiple enemies by wrapping or tripping them with her body."],["Hypnotic Fang", "Mesmerizes enemies in a large radius, causing confusion and freezing."]],
     passives: ["Cold-Blooded Calm — Gains precision and focus under pressure.","Chameleon Aura — Blends into shadows or surroundings when stationary."],
@@ -629,6 +629,30 @@ function escapeXml(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','
 // or change this to the correct relative path for your project (e.g. './assets/img/').
 const imgPath = './images/';
 const grid = document.getElementById('heroesGrid');
+const roleFiltersContainer = document.getElementById('roleFilters');
+let currentRoleFilter = 'All';
+let allCards = {};
+
+// Get all unique roles
+const allRoles = ['All', ...new Set(Object.values(heroes).map(h => h.role || 'Support'))];
+
+// Create role filter tabs
+allRoles.forEach(role => {
+  const tab = document.createElement('div');
+  tab.className = 'role-tab';
+  if(role === 'All') tab.classList.add('active');
+  tab.dataset.role = role;
+  tab.innerText = role;
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentRoleFilter = role;
+    rebuildGrid();
+  });
+  roleFiltersContainer.appendChild(tab);
+});
+
+// Build all cards
 Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
   const h = heroes[name];
   const article = document.createElement('article');
@@ -652,8 +676,23 @@ Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
       <div class="role-badge">${escapeHtml(h.role)}</div>
     </div>
   `;
-  grid.appendChild(article);
+  allCards[name] = article;
 });
+
+// Initial grid population
+function rebuildGrid() {
+  grid.innerHTML = '';
+  let cardsToShow = currentRoleFilter === 'All' 
+    ? Object.keys(allCards)
+    : Object.keys(allCards).filter(name => allCards[name].dataset.role === currentRoleFilter);
+  
+  cardsToShow.sort((a, b) => a.localeCompare(b));
+  cardsToShow.forEach(name => {
+    grid.appendChild(allCards[name]);
+  });
+}
+
+rebuildGrid();
 
 
 /* ---------------------------
