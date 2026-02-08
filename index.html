@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/png" href="favicon.png">
-<title>8 honour isekai</title>
+<title>9 honour isekai</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
   /* Fonts */
@@ -27,6 +27,12 @@
     --luminara: #00e1ff;
     --aetherist: #ff00f6;
     --tank: #009614;
+    --hero: #ffd700;
+  /* Strength rating colors */
+    --strength-brown: #8B6F47;
+    --strength-silver: #c0c0c0;
+    --strength-cyan: #00ffff;
+    --strength-purple: #9d4edd;
   /* Pulse settings */
     --pulse-duration: 2.6s;
   }
@@ -100,6 +106,21 @@
   .card[data-role="Luminara"]{--glow: var(var(--luminara))}
   .card[data-role="Aetherist"]{--glow: var(var(--aetherist))}
   .card[data-role="Tank"]{--glow: var(--tank)}
+  .card[data-role="Hero"]{--glow: var(--hero)}
+  
+  .card[data-role="Hero"]{
+    background:linear-gradient(180deg, rgba(255,215,0,0.08), rgba(255,215,0,0.04));
+    border: 1.5px solid rgba(255,215,0,0.3);
+  }
+
+  /* Strength rating dots */
+  .strength-rating{display:flex;gap:4px;align-items:center;margin-top:4px}
+  .strength-dot{width:8px;height:8px;border-radius:50%;cursor:help;transition:all .2s ease;border:1px solid rgba(255,255,255,0.2)}
+  .strength-dot:hover{transform:scale(1.3);filter:brightness(1.2)}
+  .strength-dot[data-level="1"]{background-color:var(--strength-brown)}
+  .strength-dot[data-level="2"]{background-color:var(--strength-silver)}
+  .strength-dot[data-level="3"]{background-color:var(--strength-cyan)}
+  .strength-dot[data-level="4"]{background-color:var(--strength-purple)}
   
 
   .card::after{
@@ -200,15 +221,16 @@
   .role-tab{padding:8px 18px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);cursor:pointer;transition:all .2s ease;border:1px solid rgba(255,255,255,0.05);font-weight:700;font-size:14px}
   .role-tab:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)}
   .role-tab.active{background:linear-gradient(90deg,#7dd3fc,#c07bff);color:#021024;border-color:transparent}
+  .role-tab[data-role="Hero"].active{background:linear-gradient(90deg,#ffd700,#ffed4e);color:#021024}
   @media (max-width:880px){.sheet-img{width:220px;height:220px;flex:0 0 220px}.card{height:300px}.portrait{height:180px}}
 </style>
 </head>
 <body>
   <header>
     <div class="brand">
-      <div class="logo">8H</div>
+      <div class="logo">9H</div>
       <div>
-        <h1>8honour isekai'd — Ultimate Character Roster</h1>
+        <h1>9 honour isekai'd — Ultimate Character Roster</h1>
         <div class="sub">Click a card for full details of my friendly classmates alternate persona in another world.</div>
       </div>
     </div>    
@@ -339,7 +361,7 @@ const heroes = {
 },
 
 
- "Gregory": {race:"Celestial (Half-Angel)", role:"Tank", title:"Divine Hero",
+ "Gregory": {race:"Celestial (Half-Angel)", role:"Hero", title:"Divine Hero",
     melee:"Lumisblade — a radiant sword forged from condensed light, capable of cutting through darkness and purifying corruption.",
     abilities:[["Superhuman Physique","Enhanced strength, speed, and endurance far beyond mortal limits."],["Aegis of Virtue","Creates a golden barrier that reflects projectiles and absorbs magic damage."],["Heaven’s Descent","Temporarily manifests angelic wings, granting flight and a burst of divine speed."],["Radiant Smite","Channels holy energy into his sword for devastating strikes that deal extra damage to dark or evil-aligned foes."]],
     passives:["Hero’s Resolve — Damage increases when protecting allies or standing against evil.","Divine Presence — Naturally boosts allies’ morale and weakens nearby enemies through sheer aura."],
