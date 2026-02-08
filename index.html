@@ -81,7 +81,7 @@
     box-shadow: 0 10px 30px rgba(2,6,23,0.6);
     display:flex;flex-direction:column;height:320px;position:relative;border:1px solid rgba(255,255,255,0.03);
     backdrop-filter: blur(2px);
-  }Fatebound
+  }
 
   .portrait{height:200px;background:linear-gradient(180deg,#030414,#081832);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .portrait img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
@@ -213,7 +213,7 @@
       <div class="chip"><span class="swatch" style="background:var(--shadow_stalker)"></span> Shadowstalker</div>
       <div class="chip"><span class="swatch" style="background:var(--reaver)"></span> Reaver</div>
       <div class="chip"><span class="swatch" style="background:var(--luminara)"></span> Luminara</div>
-      <div class="chip"><span class="swatch" style="background:var(--aetherist)"></span> Aetherist/div>
+      <div class="chip"><span class="swatch" style="background:var(--aetherist)"></span> Aetherist</div>
       <div class="chip"><span class="swatch" style="background:var(--tank)"></span> Tank</div>
     </div>
 
@@ -235,12 +235,45 @@
    FULL HERO DATA (all characters)
    --------------------------- */
 const heroes = {
-  "Carlos": {race:"Dark Elf", role:"Shadowstalker", title:"Shadow Assassin",
-    melee:"Dual Daggers (Shadowfangs) — can phase through matter for sneak attacks.",
-    abilities:[["Umbrakinesis","Manipulate and solidify shadows into weapons or clones. The darker the area, the stronger his strikes."],["Cloaking","Blend with shadows to become invisible briefly; breaks if he attacks or is hit by light or sound magic."],["Nightstep","Short-range teleport between shadowed spots. Can chain if stamina allows."]],
-    passives:["Darkness Buff — +25% attack speed & agility at night or in dimly lit areas.","Predator’s Focus — The longer he stalks a target without being detected, the higher his critical strike rate grows."],
-    ultimate:"Event Horizon — Carlos tears open a swirling rift of pure darkness, creating a miniature black hole born from his own energy. Light, sound, and magic are dragged inward. The ground distorts, weapons crumble, and projectiles vanish into the void. Inside the pull zone, Carlos moves freely, empowered by the collapse; every strike releases waves of compressed dark energy. When he closes his grimoire, the singularity implodes silently, unleashing a shockwave that erases anything too close.",
-    stats:{Strength:10,Agility:18,Defense:9,Intelligence:15,Perception:19,"Magic Power":18,"Technique Control":20}
+  "Brothers": {
+    role: "Shadowstalker",
+    title: "Twin Shadows",
+    race: "Human",
+    type: "dual",
+    members: {
+      "Philip": {
+        race: "Human",
+        role: "Shadowstalker",
+        title: "Younger Twin",
+        melee: "Twin Daggers — fast strikes with shadow trails",
+        abilities: [
+          ["Shadow Step", "Teleports a short distance through shadows."],
+          ["Silent Strike", "Deals critical damage if undetected."]
+        ],
+        passives: [
+          "Quick Reflexes — dodges some attacks automatically.",
+          "Stealth Affinity — harder to detect in darkness."
+        ],
+        stats: { Defense:10, Strength:12, Agility:18, Intelligence:15, Perception:16 },
+        ultimate: "Twin Shadows — merges with Steve briefly to strike all enemies at once."
+      },
+      "Steve": {
+        race: "Human",
+        role: "Shadowstalker",
+        title: "Older Twin",
+        melee: "Cloak Blade — swings with precision and stealth",
+        abilities: [
+          ["Cloak of Night", "Becomes invisible for a short period."],
+          ["Backstab", "Extra damage from behind, more effective if Philip is nearby."]
+        ],
+        passives: [
+          "Tactical Mind — can analyze battle faster.",
+          "Shadow Bond — slightly boosts Philip when near him."
+        ],
+        stats: { Defense:12, Strength:14, Agility:16, Intelligence:17, Perception:15 },
+        ultimate: "Twin Shadows — merges with Philip briefly to strike all enemies at once."
+      }
+    }
   },
 
   "Catherine": {race:"Seraph-Blessed Human", role:"Luminara", title:"Aquamancer Cleric",
@@ -355,6 +388,13 @@ const heroes = {
     ultimate:"Genesis Halo — Joshua becomes a conduit of divine will. A massive halo forms in the sky, flooding the battlefield with sanctified light that blinds evil, restores life, and reshapes the ground into holy soil. For one minute, he is the Light itself — untouchable, unstoppable, and absolute."
 },
 
+  "Joy Shannelle": {race: "Reptilian-Hybrid", role: "ShadowStalker", title: "Silver Tongue",
+    melee: "Venomless Fang — lashes or coils with precise strikes, restraining enemies without poison.",
+    abilities: [["Mind Whisper", "Subtly influences thoughts, causing hesitation or doubt in enemies."],["Serpentine Agility", "Slithers or contorts to dodge attacks or squeeze through gaps."],["Coiling Strike", "Strikes multiple enemies by wrapping or tripping them with her body."],["Hypnotic Fang", "Mesmerizes enemies in a large radius, causing confusion and freezing."]],
+    passives: ["Cold-Blooded Calm — Gains precision and focus under pressure.","Chameleon Aura — Blends into shadows or surroundings when stationary."],
+    stats: {Defense:13, Strength:12, Agility:18, Intelligence:17, Perception:16, "Magic Control":15, "Technique Control":16},
+    ultimate: "Hypnotic Fang — Joy unleashes her full hypnotic power, stunning all nearby enemies and bending weaker minds to her will for a short duration."
+},
 
   "Kiptoo": {race:"Dwarf", role:"Tank", title:"Steam Inventor",
     melee:"Reinforced Gauntlets — punch, shock, or deploy gadgets; a brutal blend of muscle and machinery.",
@@ -390,7 +430,7 @@ const heroes = {
 
   "Mario": {race: "Beastman (Wolf Type)", role: "Tank", title: "Tactical Commander",
     melee: "Cybernetic Gauntlets — enhanced for both brutal punches and gadget-assisted strikes; can amplify force, shock, or grapple enemies.",
-    abilities: "Animal Instinct — Heightened senses and reflexes: detects danger, predicts enemy movements, and reacts instantly with inhuman precision; Weapon Utilization — Instantly masters any weapon adapts attacks to enemies, terrain, and combat flow.; Overdrive Assault — Adrenaline surge boosts all physical stats moves faster, hits harder, fights like a storm.; Tactical Coordination — Leads allies with perfect timing; boosts teamwork, precision, and combat efficiency.",
+    abilities: "Animal Instinct — Heightened senses and reflexes: detects danger, predicts enemy movements, and reacts instantly with inhuman precision; Weapon Utilization — Instantly masters any weapon adapts attacks to enemies, terrain, and combat flow.; Overdrive Assault — Adrenaline surge boosts all physical stats moves faster, hits harder, fights like a storm.; Tactical Coordination — Leads allies with perfect timing that boosts teamwork, precision, and combat efficiency.",
     passives: "Savage Core — stronger at low HP; Beast Reflexes — auto dodges in range; Military Discipline — boosted endurance & focus.",
     stats: { Defense: 17, Strength: 18, Agility: 18, Intelligence: 16, Perception: 19, "Magic Control": 10, "Technique Control": 18 },
     ultimate: "Lunar Assault — taps full Beastman instincts and military expertise, gaining immense strength, speed, and perception for 30 seconds with devastating blitz attacks."
@@ -414,7 +454,7 @@ const heroes = {
   },
   "Nelvin": {race: "Human", role: "Tank", title: "Titan Vanguard",
     melee: "Giant Axe & Great Shield — Massive axe swings cleave through foes while his shield radiates a faint golden glow, automatically deflecting minor attacks.",
-    abilities: "Invincibility — temporarily Nelvin’s body glows with molten gold energy, absorbing incoming damage for a few seconds. Enemies striking him see sparks and hear metallic reverberations; Basic Shield Magic — Conjures translucent energy barriers that shimmer with faint rune patterns. Can deflect projectiles or block melee strikes, pulsing when absorbing damage; Ground Slam — Nelvin slams his axe into the ground, sending a shockwave of jagged energy rippling outward. Nearby enemies are staggered and dust explodes around them.; Fortitude Roar — Lets out a deafening, echoing roar; enemies’ weapons vibrate with energy while allies are surrounded by a faint protective aura, boosting defense and morale.",
+    abilities: "Invincibility — temporarily Nelvin’s body glows with molten gold energy, absorbing incoming damage for a few seconds. Enemies striking him see sparks and hear metallic reverberations; Basic Shield Magic — Conjures translucent energy barriers that shimmer with faint rune patterns. Can deflect projectiles or block melee strikes, pulsing when absorbing damage; Ground Slam — Nelvin slams his axe into the ground, sending a shockwave of jagged energy rippling outward. Nearby enemies are staggered and dust explodes around them.; Fortitude Roar — Lets out a deafening, echoing roar that makes enemies’ weapons vibrate with energy while allies are surrounded by a faint protective aura, boosting defense and morale.",
     passives: "Rage Bait — Enemies targeting Nelvin have a faint lightning spark trail, signaling his increased strength and resilience.; Stand Still — Glows with a golden aura when stationary, armor bracing for maximum stability.; Enduring Spirit — Soft golden light pulses around Nelvin when regenerating HP, symbolizing unyielding endurance..",
     stats: { Defense: 20, Strength: 16, Agility: 10, Intelligence: 14, Perception: 14, 'Magic Control': 10, 'Technique Control': 16 },
     ultimate: "Colossus Rampage — Nelvin becomes a golden juggernaut, charging forward in a blaze of sparks. Each axe swing releases energy arcs that crush enemies, while his shield emits shockwaves protecting allies. The ground cracks beneath his feet, leaving a glowing trail marking his unstoppable path. Lasts 15–20 seconds."
@@ -450,6 +490,14 @@ const heroes = {
     passives:["Adaptive Caster — Gains small boosts to magic control and intelligence whenever copying new spells.","Memory Recall — Can perfectly retain any observed spell for a limited duration.","Arcane Reflexes — Automatically reacts to magic attacks faster than normal, thanks to his imitation instincts."],
     ultimate:"Archmage Replica — duplicates all enemy spell patterns in the area, instantly casting them against them while enhancing his own speed and magic control for 15 seconds. Chaos and confusion reign supreme.",
     stats:{Defense:12,Strength:10,Agility:14,Intelligence:19,Perception:19,"Magic Control":20,"Technique Control":19}
+},
+
+  "Rosemary": {race: "Human (Light-Touched)", role: "Luminara", title: "Dawnflare", img:"rosemary.jpg",
+    melee: "Solar Baton — glows intensely when channeling light, striking foes with searing brilliance.",
+    abilities: [["Flashbang Burst", "Instantly emits blinding light, disorienting enemies."],["Luminescent Dash", "Dashes rapidly, leaving a trail of damaging light."],["Solar Beam", "Fires a focused beam that pierces shields and barriers."],["Sunburst Nova", "Radiant explosion that blinds and burns enemies while healing allies."]],
+    passives: ["Radiance Aura — Nearby allies gain minor HP regen and movement speed.","Bright Presence — Reduces enemy accuracy in her line of sight."],
+    stats: {Defense:14, Strength:11, Agility:17, Intelligence:18, Perception:17, "Magic Control":19, "Technique Control":16},
+    ultimate: "Sunburst Nova — Rosemary releases her full solar power, creating a massive burst of light that blinds all enemies and rapidly restores ally health."
 },
 
   "Sharlene": {race:"Unknown Human Variant", role:"Aetherist", title:"Karma Witch", img:"sharlene.jpg",
@@ -550,7 +598,7 @@ function getCssVar(name){
    Generate SVG placeholder (data URL) by name & role color
    --------------------------- */
 function generatePlaceholder(name, role){
-  const initials = name.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+  const initials = name.split(' ').map(s=>s[0]).slice(0,1).join('').toUpperCase();
   const bg = roleColor(role) || '#6b46c1';
   const fg = '#021024';
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
@@ -609,12 +657,76 @@ Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
    --------------------------- */
 const overlay = document.getElementById('overlay');
 const sheet = document.getElementById('sheet');
+let currentMember = "Philip"; // Track which brother is currently displayed
+
+function buildModalContent(h) {
+  let abilitiesHtml = '';
+  if (Array.isArray(h.abilities)) {
+    abilitiesHtml = h.abilities.map(a => `<div class="ability"><strong>${escapeHtml(a[0])}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(a[1])}</div></div>`).join('');
+  } else if (typeof h.abilities === 'string') {
+    abilitiesHtml = h.abilities.split(';').map(ability => {
+      const [name, desc] = ability.split('—').map(s => s.trim());
+      return `<div class="ability"><strong>${escapeHtml(name)}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(desc || '')}</div></div>`;
+    }).join('');
+  }
+  
+  let passivesHtml = '';
+  if (Array.isArray(h.passives)) {
+    passivesHtml = h.passives.map(p => `<div class="passive">${escapeHtml(p)}</div>`).join('');
+  } else if (typeof h.passives === 'string') {
+    passivesHtml = h.passives.split(';').map(passive => 
+      `<div class="passive">${escapeHtml(passive.trim())}</div>`
+    ).join('');
+  }
+  const statsHtml = Object.entries(h.stats || {}).map(([k,v])=>`<div class="stat"><b>${v}</b><div style="font-size:11px;color:var(--muted)">${escapeHtml(k)}</div></div>`).join('');
+
+  sheet.innerHTML = `
+    <div class="sheet-top">
+      <div class="sheet-img"><img src="${imgPath + (h.img||'')}" alt="${escapeHtml(currentMember)} large" onerror="this.onerror=null;this.src=generatePlaceholder('${escapeJs(currentMember)}','${escapeJs(h.role)}')"></div>
+      <div class="sheet-right">
+        <h2>${escapeHtml(currentMember)}</h2>
+        <div class="muted">${escapeHtml(h.title)} • ${escapeHtml(h.race)}</div>
+        <p><strong>Role:</strong> ${escapeHtml(h.role)}</p>
+        <p><strong>Melee:</strong> ${escapeHtml(h.melee || '')}</p>
+        <div class="stat-row">${statsHtml}</div>
+      </div>
+    </div>
+    <div class="abilities"><h3 style="margin:8px 0 8px;color:var(--accent)">Abilities</h3>${abilitiesHtml}</div>
+    <div class="ultimate"><h3 style="margin:8px 0 6px;color:var(--accent)">Ultimate</h3><p style="margin:0;color:var(--muted)">${escapeHtml(h.ultimate || '')}</p></div>
+    <div style="margin-top:12px" class="passives"><h3 style="margin:8px 0 12px;color:var(--accent)">Passives</h3>${passivesHtml}</div>
+    <div style="display:flex;justify-content:flex-end;gap:8px"><div class="close-btn" id="switchBtn">Switch Twin</div><div class="close-btn" id="closeBtn">Close</div></div>
+  `;
+  overlay.classList.add('show');
+  overlay.setAttribute('aria-hidden','false');
+  
+  document.getElementById('closeBtn').onclick = closeModal;
+  document.getElementById('switchBtn').onclick = switchBrother;
+}
+
+function switchBrother() {
+  currentMember = currentMember === "Philip" ? "Steve" : "Philip";
+  const h = heroes["Brothers"].members[currentMember];
+  buildModalContent(h);
+}
+
+function showBrotherModal(card) {
+  currentMember = "Philip";
+  const h = heroes["Brothers"].members[currentMember];
+  buildModalContent(h);
+}
 
 grid.addEventListener('click', (e)=>{
   const card = e.target.closest('.card');
   if(!card) return;
   const name = card.dataset.hero;
   if(!name) return;
+  
+  // Special handling for Brothers
+  if(name === "Brothers") {
+    showBrotherModal(card);
+    return;
+  }
+  
   const h = heroes[name];
   if(!h) return;
 
@@ -642,7 +754,7 @@ grid.addEventListener('click', (e)=>{
 
   sheet.innerHTML = `
     <div class="sheet-top">
-  <div class="sheet-img"><img src="${imgPath + h.img}" alt="${escapeHtml(name)} large" onerror="this.onerror=null;this.src=generatePlaceholder('${escapeJs(name)}','${escapeJs(h.role)}')"></div>
+      <div class="sheet-img"><img src="${imgPath + h.img}" alt="${escapeHtml(name)} large" onerror="this.onerror=null;this.src=generatePlaceholder('${escapeJs(name)}','${escapeJs(h.role)}')"></div>
       <div class="sheet-right">
         <h2>${escapeHtml(name)}</h2>
         <div class="muted">${escapeHtml(h.title)} • ${escapeHtml(h.race)}</div>
