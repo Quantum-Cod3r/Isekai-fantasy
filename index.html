@@ -90,6 +90,25 @@
   }
 
   .portrait{height:200px;background:linear-gradient(180deg,#030414,#081832);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+
+  .tier-badge {
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .tier-SS { background: rgba(255, 215, 0, 0.25); border-color: rgba(255, 215, 0, 0.7); }
+  .tier-S { background: rgba(63, 153, 255, 0.2); border-color: rgba(63, 153, 255, 0.6); }
+  .tier-A { background: rgba(94, 245, 129, 0.22); border-color: rgba(94, 245, 129, 0.55); }
+  .tier-B { background: rgba(203, 200, 43, 0.22); border-color: rgba(203, 200, 43, 0.6); }
+  .tier-C { background: rgba(221, 150, 86, 0.22); border-color: rgba(221, 150, 86, 0.6); }
+  .tier-D { background: rgba(225, 102, 169, 0.22); border-color: rgba(225, 102, 169, 0.6); }
+  .tier-E { background: rgba(185, 185, 185, 0.22); border-color: rgba(185, 185, 185, 0.55); }
   .portrait img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
   .card:hover .portrait img{transform:scale(1.03)}
 
@@ -99,6 +118,10 @@
   .hero-desc{font-size:12px;color:var(--muted);margin-top:4px;max-width:160px}
 
   .role-badge{font-size:12px;padding:6px 8px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--muted)}
+  .tier-power {font-size: 12px; color: rgba(255,255,255,0.9); margin-top: 2px;}
+  .tier-filters, .role-filters {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .filter-chip {font-size:11px;cursor:pointer;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.05);color:var(--muted);font-weight:700;}
+  .filter-chip.active {background:rgba(0,0,0,0.25);border-color:rgba(255,255,255,0.35);color:#fff;}
 
   /* neon glows per role with breathing pulse */
   .card[data-role="Shadow_stalker"]{--glow: var(--shadow_stalker)}
@@ -109,6 +132,11 @@
   .card[data-role="Hero"]{--glow: var(--hero)}
   
   .card[data-role="Hero"]{
+    background:linear-gradient(180deg, rgba(255,215,0,0.08), rgba(255,215,0,0.04));
+    border: 1.5px solid rgba(255,215,0,0.3);
+  }
+
+  .card[data-tier="SS"], .card[data-tier="S"]{
     background:linear-gradient(180deg, rgba(255,215,0,0.08), rgba(255,215,0,0.04));
     border: 1.5px solid rgba(255,215,0,0.3);
   }
@@ -256,6 +284,7 @@
     </div>
 
     <div class="role-filters" id="roleFilters"></div>
+    <div class="tier-filters" id="tierFilters"></div>
 
     <section class="grid" id="heroesGrid"></section>
     <section class="grid hidden" id="loreGrid"></section>
@@ -693,8 +722,10 @@ const imgPath = './images/';
 const grid = document.getElementById('heroesGrid');
 const loreGrid = document.getElementById('loreGrid');
 const roleFiltersContainer = document.getElementById('roleFilters');
+const tierFiltersContainer = document.getElementById('tierFilters');
 const viewTabs = document.getElementById('viewTabs');
 let currentRoleFilter = 'All';
+let currentTierFilter = 'All';
 let currentView = 'abilities';
 let allCards = {};
 let loreCards = {};
@@ -715,11 +746,47 @@ allRoles.forEach(role => {
   roleFiltersContainer.appendChild(tab);
 });
 
-Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
-  const h = heroes[name];
+const tierLabels = ['All','SS','S','A','B','C','D','E'];
+tierLabels.forEach(tier => {
+  const chip = document.createElement('div');
+  chip.className = 'filter-chip';
+  if(tier === 'All') chip.classList.add('active');
+  chip.dataset.tier = tier;
+  chip.innerText = tier;
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#tierFilters .filter-chip').forEach(t => t.classList.remove('active'));
+    chip.classList.add('active');
+    currentTierFilter = tier;
+    rebuildGrid();
+  });
+  tierFiltersContainer.appendChild(chip);
+});
 
+const rankedHeroes = Object.keys(heroes).map(name => {
+  const h = heroes[name];
+  const total = Object.values(h.stats || {}).reduce((acc,val)=>acc + (typeof val === 'number' ? val : 0), 0);
+  return {name, h, total};
+}).sort((a,b) => b.total - a.total || a.name.localeCompare(b.name));
+
+const tierFor = total => {
+  if(total >= 120) return 'SS';
+  if(total >= 116 && total <= 119) return 'S';
+  if(total >= 110 && total <= 115) return 'A';
+  if(total >= 108 && total <= 109) return 'B';
+  if(total >= 106 && total <= 107) return 'C';
+  if(total >= 104 && total <= 105) return 'D';
+  if(total >= 100 && total <= 103) return 'E';
+  return 'E';
+};
+
+rankedHeroes.forEach(({name,h,total})=>{
+  const tier = tierFor(total);
   const article = document.createElement('article');
   article.className = 'card';
+  article.dataset.hero = name;
+  article.dataset.role = h.role || 'Support';
+  article.dataset.tier = tier;
+  article.style.setProperty('--pulse-size', `${40 + Math.floor(Math.random()*30)}px`);
   article.dataset.hero = name;
   article.dataset.role = h.role || 'Support';
   article.style.setProperty('--pulse-size', `${40 + Math.floor(Math.random()*30)}px`);
@@ -733,6 +800,7 @@ Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
         <div class="hero-desc">${escapeHtml(h.title)} • ${escapeHtml(h.race)}</div>
       </div>
       <div class="role-badge">${escapeHtml(h.role)}</div>
+      <div class="tier-badge tier-${tier}">${tier}</div>
     </div>
   `;
   allCards[name] = article;
@@ -760,11 +828,13 @@ Object.keys(heroes).sort((a,b)=>a.localeCompare(b)).forEach(name=>{
 
 function rebuildGrid() {
   grid.innerHTML = '';
-  let cardsToShow = currentRoleFilter === 'All'
-    ? Object.keys(allCards)
-    : Object.keys(allCards).filter(name => allCards[name].dataset.role === currentRoleFilter);
+  let cardsToShow = Object.keys(allCards).filter(name => {
+    const card = allCards[name];
+    const roleMatch = currentRoleFilter === 'All' || card.dataset.role === currentRoleFilter;
+    const tierMatch = currentTierFilter === 'All' || card.dataset.tier === currentTierFilter;
+    return roleMatch && tierMatch;
+  });
 
-  cardsToShow.sort((a, b) => a.localeCompare(b));
   cardsToShow.forEach(name => grid.appendChild(allCards[name]));
 }
 
@@ -887,6 +957,8 @@ grid.addEventListener('click', (e)=>{
   const h = heroes[name];
   if(!h) return;
 
+  const total = Object.values(h.stats || {}).reduce((acc,val)=>acc + (typeof val === 'number' ? val : 0), 0);
+
   let abilitiesHtml = '';
   if (Array.isArray(h.abilities)) {
     abilitiesHtml = h.abilities.map(a => `<div class="ability"><strong>${escapeHtml(a[0])}</strong><div style="color:var(--muted);margin-top:6px">${escapeHtml(a[1])}</div></div>`).join('');
@@ -912,6 +984,7 @@ grid.addEventListener('click', (e)=>{
         <h2>${escapeHtml(name)}</h2>
         <div class="muted">${escapeHtml(h.title)} • ${escapeHtml(h.race)}</div>
         <p><strong>Role:</strong> ${escapeHtml(h.role)}</p>
+        <p><strong>Total Power:</strong> ${total}</p>
         <p><strong>Melee:</strong> ${escapeHtml(h.melee || '')}</p>
         <div class="stat-row">${statsHtml}</div>
       </div>
